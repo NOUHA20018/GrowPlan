@@ -1,0 +1,90 @@
+.app-container {
+  padding: 2rem;
+}
+
+.app-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.app-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.app-content-headerText {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.mode-switch {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-switch:hover {
+  background-color: #e0e0e0;
+}
+
+.app-content-headerButton a:hover {
+  background-color: #1e40af;
+}
+
+.course-details {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  
+  .course-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .course-description {
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  body.dark-mode {
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+  
+  body.dark-mode .app-content {
+    background-color: #374151;
+  }
+  
+  body.dark-mode .course-details {
+    background-color: #4b5563;
+    color: #f3f4f6;
+  }
+  
+.app-content-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.app-content-actions video {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.app-content-actions video:hover {
+  transform: scale(1.02);
+}
