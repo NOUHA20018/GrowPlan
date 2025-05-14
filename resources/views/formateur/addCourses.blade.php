@@ -75,7 +75,9 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
 
-                        <a href="{{ route('formateur.categories.create') }}" class="px-4 py-2 bg-blue-500 text-black rounded-md shadow hover:bg-blue-600 mt-2 inline-block">Ajouter Catégorie</a>
+                        <a href="{{ route('formateur.categories.create',['from' => 'cours']) }}" class="px-4 py-2 bg-blue-500 text-black rounded-md shadow hover:bg-blue-600 mt-2 inline-block">Ajouter Catégorie</a>
+                        {{-- Champ caché donnant l'origine de l'appel --}}
+                         <input type="hidden" name="from" value="{{ $from }}">
                     </div>
 
                     <div>

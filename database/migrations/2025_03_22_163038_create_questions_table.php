@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Requests\UserTypes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quizzes', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('reponse');
-            $table->string('bonne_reponse');
-            $table->foreignId('chapitre_id')->constrained('chapitres');
-            $table->foreignId('cour_id')->constrained('cours');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('quizze_id')->constrained('quizzes');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quizzes');
+        Schema::dropIfExists('questions');
     }
 };

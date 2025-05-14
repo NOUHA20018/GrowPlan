@@ -1,5 +1,5 @@
 <x-app-layout>
-  @include('layouts.navigationFormateur')
+  {{-- @include('layouts.navigationFormateur') --}}
     <x-slot name="header">
         <link rel="stylesheet" href="{{asset('assets/css/formateur/listCour.css')}}">
     </x-slot>
@@ -16,90 +16,60 @@
             </button>
             <button class="app-content-headerButton"><a href="{{route('formateur.courses.create')}}">Add Cours</a></button>
           </div>
-          <div class="app-content-actions">
-            
-            <div class="app-content-actions-wrapper">
-              <div class="filter-button-wrapper">
-                <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
-              </div>
-              <button class="action-button list active" title="List View">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-              </button>
-              <button class="action-button grid" title="Grid View">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              </button>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @forelse ($cours as $cour)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
-                    <div class="p-4">
-                     <a href="{{route('formateur.courses.info',$cour->id)}}"> <img style="width: 100%; height: 220px;" src="{{asset('Cours/'.$cour->id.'/'.$cour->image) ?: asset('default-image.jpg')}}" alt="Course Image"></a>
-                      <h2 class="text-xl font-bold mb-2">{{ $cour->title }}</h2>
-                        <p>{{$cour->description}}</p>
-                        <div class="product-cell category">{{$cour->categorie->title}}</div>
-                        <img src="" alt="llllll">{{$cour->user->profile}}
-                        <div class="product-cell stock">{{$cour->user->name}}</div>
-                        <div class="product-cell price">{{$cour->prix}}</div>
-                        @if($cour->chapitres->count()>0)
-                          <div class="product-cell price"><span class="cell-label">Nbr chapitres :</span>{{$cour->chapitres->count()}}</div>
-                        @endif
+            @include('layouts.actions')
 
-                    </div>
-                </div>
-                @empty
-                <p>No courses available at the moment.</p>
-            @endforelse
-        </div>
-          {{-- <div class="products-area-wrapper tableView"> --}}
-            {{-- <div class="products-header">
-              <div class="product-cell image">
-                Title
-                <button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button>
-              </div> --}}
-              {{-- <div class="product-cell category">Category<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-              <div class="product-cell status-cell">Description<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-              <div class="product-cell sales">Date Creation<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-              <div class="product-cell stock">Creator<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-              <div class="product-cell price">Price<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-            </div> --}}
-              
-            
-            
-            
-            
+        @if(session('success'))
+            <div style="background-color: rgb(39, 153, 39)" class="bg-green-400 border border-green-400 text-green-700 px-4 py-3 rounded relative my-4" role="alert">
+                <strong class="font-bold">Succès !</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+        @if(session('error'))
+            <div style="background-color: rgb(184, 184, 184)" class= text-green-700 px-4 py-3 rounded relative my-4" role="alert">
+                <strong class="font-bold">Error !</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+          @if(request('view') === 'list')        
+              @include('partials.list')
+            @else
+               @include('partials.card') 
+
+            @endif 
           
-                {{-- <div class="products-row">
-                <button class="cell-more-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                </button>
-                    <div class="product-cell image">
-                    <a href="{{route('formateur.cour_info',$cour->id)}}"><span>{{$cour->title}}</span></a>
-                    </div>
-                <div class="product-cell category"><span class="cell-label">Category:</span>{{$cour->categorie->title}}</div>
-                <div class="product-cell sales"><span class="cell-label">Description:</span>{{$cour->description}}</div>
-                <div class="product-cell stock">
-                  <span class="cell-label">Date Creation:</span>
-                  {{ \Carbon\Carbon::parse($cour->date_creation)->format('d/m/Y') }}
-                </div>
-              
-                <div class="product-cell stock"><span class="cell-label">Creator:</span>{{$cour->user->name}}</div>
-                <div class="product-cell price"><span class="cell-label">Price:</span>{{$cour->prix}}</div>
-                </div> --}}
-            {{-- @endforeach --}}
-          {{-- </div> --}}
         </div>
       </div>
+       <script>
+        function changeView(view) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('view', view);
+            window.location.href = url.toString();
+          }
+          
+    document.querySelectorAll('.delete-cours-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                  title: 'Confirmation de suppression',
+                text: "Voulez-vous vraiment supprimer ce cour ? ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Oui, je confirme',
+                cancelButtonText: 'Annuler'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      form.submit(); 
+                  }
+              });
+        });
+    });
+
+
+    </script>
+    
+    
+
 </x-app-layout>

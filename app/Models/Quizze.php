@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quizze extends Model
 {
     protected $fillable = [
-        'question','reponse','bonne_reponse','chapitre_id','cour_id'
+        'question','reponse','bonne_reponse','chapitre_id','cour_id','user_id'
     ];
 
     public function users(){
@@ -20,5 +20,8 @@ class Quizze extends Model
     }
     public function cour(){
         return $this->belongsTo(Cour::class,'cour_id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
     }
 }

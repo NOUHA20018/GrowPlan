@@ -25,8 +25,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'role' => 'integer',
     ];
-    public function quizzes(){
-        return $this->belongsToMany(Quizze::class,'apprenant_quizze','quizze_id',"user_id")->where('role',UserTypes::APPRENANT);
+
+    public function apprenantQuizzes()
+    {
+        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id')
+        ->where('role',UserTypes::APPRENANT);
+    }
+
+public function formateurQuizzes()
+    {
+        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id')
+           ->where('role',UserTypes::FORMATEUR);
     }
 
     public function paiements(){

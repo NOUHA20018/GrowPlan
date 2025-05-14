@@ -1,3 +1,83 @@
+/* Style des sections */
+.course-section {
+  background-color: #f9fafb;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Boutons de modification */
+.edit-button {
+  background-color: #e2e8f0;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #cbd5e1;
+}
+
+/* Inputs éditables */
+input.editable, textarea.editable {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
+/* Bouton d'ajout de chapitre */
+.add-chapter-button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Button Save Courses */
+.saveButton{
+  background-color : lightpink;
+  color:black;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+.add-chapter-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Cartes de chapitres */
+.chapter-card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fdf2f8;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-video {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* Résumé */
+.resume-container {
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
 .app-container {
   padding: 2rem;
 }

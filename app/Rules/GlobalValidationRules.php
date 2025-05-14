@@ -12,12 +12,15 @@ class GlobalValidationRules
         ];
     }
 
-    public static function product()
+    public static function courses()
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'description' => ['nullable', 'string'],
+           'title' => ['required','string','min:2'],
+            'description' => ['nullable','string','min:4'],
+            'prix' => ['required','integer'],
+            'date_creation' => ['nullable','date'],
+            'categorie_id'=> ['required'],
+            'image' =>['image','nullable','mimes:jpg,bmp,png']
         ];
     }
 
