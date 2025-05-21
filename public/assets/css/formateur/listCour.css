@@ -3,6 +3,8 @@
   box-sizing: border-box;
 }
 
+
+
 :root {
   --app-bg: #101827;
   --sidebar: rgba(21, 30, 47,1);
@@ -32,6 +34,9 @@
   --filter-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.header{
+  padding:5px;
+}
 
 .app-container {
   font-family: 'Arial', sans-serif;

@@ -1,23 +1,44 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @forelse ($cours as $cour)
-        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
-            <div class="p-4">
-                <a href="{{route('formateur.courses.info',$cour->id)}}">
-                <img style="width: 100%; height: 220px;" src="{{asset('Cours/'.$cour->id.'/'.$cour->image) ?: asset('Cours/default-image.jpg')}}" alt="Course Image"></a>
-                <h2 class="text-xl font-bold mb-2">{{ $cour->title }}</h2>
-                <div class="product-cell category text-gray-500">{{$cour->categorie->title}}</div>
-                <div class="row">
-                <img class="col-sm-6" src="" alt="img">{{$cour->user->profile}}
-                <div class=" col-sm-6 product-cell stock">{{$cour->user->name}}</div>
+                    @forelse ($cours as $cour)
+                        <div class="course-card bg-white">
+                            <a href="{{ route('formateur.courses.info', $cour->id) }}">
+                                <img class="course-image" src="{{ asset('Cours/'.$cour->id.'/'.$cour->image) ?: asset('Cours/default-image.jpg') }}" alt="Course Image">
+                            </a>
+                            <div class="course-body">
+                                <h3 class="course-title">{{ $cour->title }}</h3>
+                                <div class="course-meta">
+                                    <i class="fas fa-tag"></i>
+                                    <span>{{ $cour->categorie->title }}</span>
+                                </div>
+                                <div class="course-meta">
+                                    <i class="fas fa-user"></i>
+                                    <span>{{ $cour->user->name }}</span>
+                                </div>
+                                <div class="course-meta">
+                                    <i class="fas fa-list-ol"></i>
+                                    <span>{{ $cour->chapitres->count() }} Chapitres</span>
+                                </div>
+                                <div class="course-price">
+                                    ${{ number_format($cour->prix, 2) }}
+                                </div>
+                                <div class="course-actions">
+                                    <a href="{{ route('formateur.courses.info', $cour->id) }}" 
+                                       class="btn-edit px-3 py-1 rounded text-sm">
+                                        <i class="fas fa-edit mr-1"></i> Modifier
+                                    </a>
+                                    <form method="POST" action="{{ route('formateur.cours.destroy', $cour->id) }}" class="delete-cours-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete px-3 py-1 rounded text-sm">
+                                            <i class="fas fa-trash mr-1"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-span-full text-center py-8">
+                            <p class="text-gray-500">Aucun cours disponible pour le moment.</p>
+                        </div>
+                    @endforelse
                 </div>
-                <div class="product-cell price">$ {{$cour->prix}}</div>
-                @if($cour->chapitres->count()>0)
-                    <div class="product-cell price">{{$cour->chapitres->count()}} Chapters</div>
-                @endif
-
-            </div>
-        </div>
-        @empty
-                <p>No courses available at the moment.</p>
-            @endforelse
-</div>

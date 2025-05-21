@@ -15,7 +15,7 @@ class ApprenantMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'apprenant') {
+        if (auth()->check() && auth()->user()->role ==3) {
             return $next($request);
         }
 

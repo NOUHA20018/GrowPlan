@@ -7,7 +7,7 @@
 
     <div class="">
         <div class="bg-gray-100 p-6">
-            <h1 class="text-2xl font-bold mb-6">👨‍🏫 Tableau de bord - Formateur</h1>
+            <h1 class="text-2xl font-bold mb-6"> Tableau de bord - Formateur</h1>
             <div class="flex justify-between gap-6 flex-wrap">
                 <div class="bg-white rounded-2xl shadow p-6 flex-1 min-w-[250px]">
                     <h2 class="text-lg font-semibold text-gray-700">📚 Nombre de cours</h2>
@@ -50,15 +50,15 @@
                                 </th>
                                 <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Description </th>
                                 <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Prix 
-                                   <button onclick="toggleFilterMenu('filter-prix')" class="ml-1 text-gray-500">
+                                   {{-- <button onclick="toggleFilterMenu('filter-prix')" class="ml-1 text-gray-500">
                                       <i class="fas fa-filter"></i>
-                                  </button>
+                                  </button> --}}
                                   <div id="filter-prix" class="hidden absolute z-10 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
                                       <div class="p-2 max-h-60 overflow-y-auto"></div>
                                   </div>
                                 </th>
-                                <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Chapitres <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-6.414 6.414A1 1 0 0014 13v5.586a1 1 0 01-1.707.707l-2-2A1 1 0 0110 17v-4.586a1 1 0 00-.293-.707L3.293 6.707A1 1 0 013 6V4z" /></svg></th></th>
-                                <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Créé le <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-6.414 6.414A1 1 0 0014 13v5.586a1 1 0 01-1.707.707l-2-2A1 1 0 0110 17v-4.586a1 1 0 00-.293-.707L3.293 6.707A1 1 0 013 6V4z" /></svg></th></th>
+                                <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Chapitres </th>
+                                <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Créé le </th>
                                 <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Action</th>
                             </tr>
                         </thead>

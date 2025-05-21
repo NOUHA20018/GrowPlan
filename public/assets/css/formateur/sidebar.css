@@ -4,7 +4,7 @@
     z-index: 200; 
     flex-basis: 200px;
     flex-shrink: 0;
-    background-color: #8b8589;
+    background-color: #417dc1;
     display: flex;
     flex-direction: column;
     position: fixed; 
@@ -44,7 +44,7 @@
     margin-right: 8px;
   }
   .sidebar-list-item:hover {
-    background-color: var(--sidebar-hover-link);
+    background-color: #4997d0;
   }
   .sidebar-list-item.active {
     background-color: var(--sidebar-active-link);

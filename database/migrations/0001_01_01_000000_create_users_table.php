@@ -19,7 +19,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role')->default(3);
-            $table->string('profil')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('addresse')->nullable();
             $table->enum('level',['debutant','intermediaire','avance'])->nullable();

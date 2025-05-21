@@ -97,11 +97,11 @@ class ChapterController extends Controller
         }
 
         
-        public function showChapter(Chapitre $chapitre)
+        public function editChapter(Chapitre $chapitre)
         {
             // $chapitre = Chapitre::find($chapitre);
             $chapitres =Chapitre::all();
-            return view('formateur.showChapter', compact('chapitre','chapitres'));
+            return view('formateur.editChapter', compact('chapitre','chapitres'));
         }
         public function updateChapter(Request $req, $id)
     {

@@ -19,6 +19,23 @@ document.querySelector(".jsFilter").addEventListener("click", function () {
  });
  
  var modeSwitch = document.querySelector('.mode-switch');
- modeSwitch.addEventListener('click', function () {                      document.documentElement.classList.toggle('light');
+ modeSwitch.addEventListener('click', function () {            
+    document.documentElement.classList.toggle('light');
   modeSwitch.classList.toggle('active');
  });
+
+//  welcome
+// Effet d'apparition lors du scroll
+document.addEventListener("DOMContentLoaded", function () {
+    const aboutSection = document.querySelector("#about");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(aboutSection);
+});

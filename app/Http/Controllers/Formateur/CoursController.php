@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Formateur;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\Chapitre;
 use App\Models\Cour;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,7 @@ class CoursController extends Controller
         }else{
             $cours= Cour::with('chapitres')->find($id);
             $categories = Categorie::all()->where('status','=','active');
-            return view('formateur.showCour',compact('cours','categories'));
+            return view('formateur.editCour',compact('cours','categories'));
         }
         
     }
@@ -90,14 +91,34 @@ class CoursController extends Controller
             unlink($imagePath);
              }   
              $folderPath = public_path('Cours/' . $id);
-        if (is_dir($folderPath) && count(scandir($folderPath)) <= 2) {
-            rmdir($folderPath);
-        }
-
+            if (is_dir($folderPath) && count(scandir($folderPath)) <= 2) {
+                rmdir($folderPath);
+            }
+            $coursID = $cours->id;
+            $chapitres = Chapitre::where('cour_id','=',$coursID)->get();
+            if($chapitres){
+            foreach ($chapitres as $chapitre){
+                $chapitreVedioPath = public_path('chapitres/'.$chapitre->id.'/'.$chapitre->video);
+                if(file_exists($chapitreVedioPath)){
+                    unlink($chapitreVedioPath);
+                }
+                $folderVedioPath = public_path('chapitres/'.$chapitre->id);
+                if(is_dir($folderVedioPath) && count(scandir($folderVedioPath)) <=2){
+                    rmdir($folderVedioPath);
+                }
+                $chapitreResumePath = public_path('resumes/'.$chapitre->id.'/'.$chapitre->resume);
+                if(file_exists($chapitreResumePath)){
+                    unlink($chapitreResumePath);
+                }
+                $folderResumePath = public_path('resumes/'.$chapitre->id);
+                if(is_dir($folderResumePath) && count(scandir($folderResumePath)) <=2){
+                    rmdir($folderResumePath);
+                }
+            }
+            }
             $cours->delete(); 
          return redirect()->back()->with('success', 'Cours supprimé avec succès.');
     }
-
     return redirect()->back()->with('error', 'Cours introuvable.');
     }
 

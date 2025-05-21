@@ -7,28 +7,12 @@
                         <h1>Hello {{ Auth::user()->name }}!</h1>
                     </div>
                 </div>
-
-                <div class="flex justify-center flex-1 items-center">
-                    <div class="relative w-full max-w-xl">
-                        <input type="text" class="w-full px-4 py-2 pl-10 pr-4 border rounded-md text-sm text-gray-700 placeholder-gray-500" placeholder="Search..." />
-                        {{-- <i class='fa fa-search'></i>                 --}}
-                        <div class="absolute top-3 right-3">
-                            <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 0l6 6" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="flex items-center space-x-4">
-                    <button class="p-2 text-gray-500 hover:text-gray-700">
-                        <span class="material-symbols-outlined">notifications</span>
-                    </button>
-
+                  
                     <div class="relative">
-                        <button class="p-2 text-gray-500 hover:text-gray-700">
+                        {{-- <button class="p-2 text-gray-500 hover:text-gray-700">
                             <img src="{{ Auth::user()->image }}" alt="User Image" class="h-8 w-8 rounded-full">
-                        </button>
+                        </button> --}}
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

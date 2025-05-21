@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Formateur;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\Chapitre;
+use App\Models\Cour;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
@@ -16,9 +18,9 @@ class CategorieController extends Controller
         return view('formateur.categories',compact('categories','from'));
 
     }
-    public function showCategory($id){
+    public function editCategory($id){
         $category = Categorie::find($id);
-        return view('formateur.showCategory',compact('category'));
+        return view('formateur.editCategory',compact('category'));
     }
 
    public function addCategory(Request $request)
@@ -58,23 +60,7 @@ class CategorieController extends Controller
             }
             return redirect()->route('formateur.categories.index')->with('success', 'Catégorie ajoutée avec succès.');
         }
-        public function destroyCategory($id){
-            $categorie = Categorie::find($id);
-            
-            if($categorie){
-            $imagePath = public_path('Categories/' . $id . '/' . $categorie->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }   
-             $folderPath = public_path('Categories/' . $id);
-        if (is_dir($folderPath) && count(scandir($folderPath)) <= 2) {
-            rmdir($folderPath);
-        }
-            $categorie->delete();
-            return redirect()->back()->with('success','Categorie bien supprimer');
-        }
-
-    }
+       
 public function updateCategory(Request $req ,$id){
     $categorie = Categorie::findOrFail($id);
     // dd($categorie);
@@ -109,5 +95,57 @@ public function updateCategory(Request $req ,$id){
     return redirect()->back()->with('success','Category updated successfully.');
 }
 
+
+ public function destroyCategory($id){
+            $categorie = Categorie::find($id);
+             if (!$categorie) {
+                return redirect()->back()->with('error', 'Catégorie introuvable.');
+            }
+            $imagePath = public_path('Categories/' . $id . '/' . $categorie->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }   
+                $folderPath = public_path('Categories/' . $id);
+                if (is_dir($folderPath) && count(scandir($folderPath)) <= 2) {
+                    rmdir($folderPath);
+                }
+            $cours = Cour::where('categorie_id',$id)->get();
+            foreach($cours as $cour){
+                    $courImagePath = public_path('Cours/'.$cour->id.'/'.$cour->image);
+                    if(file_exists($courImagePath)){
+                        unlink($courImagePath);
+                    }
+                    $courFolderPath = public_path('Cours/'.$cour->id);
+                    if(is_dir($courFolderPath) && count(scandir($courFolderPath)) <= 2){
+                        rmdir($courFolderPath);
+                    }
+                    $chapitres = Chapitre::where('cour_id',$cour->id)->get();
+                if($chapitres){
+                    foreach ($chapitres as $chapitre){
+                        $chapitreVedioPath = public_path('chapitres/'.$chapitre->id.'/'.$chapitre->video);
+                        if(file_exists($chapitreVedioPath)){
+                            unlink($chapitreVedioPath);
+                        }
+                        $folderVedioPath = public_path('chapitres/'.$chapitre->id);
+                        if(is_dir($folderVedioPath) && count(scandir($folderVedioPath)) <=2){
+                            rmdir($folderVedioPath);
+                        }
+                        $chapitreResumePath = public_path('resumes/'.$chapitre->id.'/'.$chapitre->resume);
+                        if(file_exists($chapitreResumePath)){
+                            unlink($chapitreResumePath);
+                        }
+                        $folderResumePath = public_path('resumes/'.$chapitre->id);
+                        if(is_dir($folderResumePath) && count(scandir($folderResumePath)) <=2){
+                            rmdir($folderResumePath);
+                        }
+                        $chapitre->delete();
+                    }
+                }
+                $cour->delete();
+            }
+            $categorie->delete();
+            return redirect()->back()->with('success','Categorie bien supprimer');
+
+    }
 
 }

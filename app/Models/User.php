@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name','prenom','email','password','role','profil','date_naissance','addresse','level','bio','total_earnings','cours_valides','cours_refuse'
+        'name','prenom','email','password','role','date_naissance','addresse','level','bio','total_earnings','cours_valides','cours_refuse'
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',
