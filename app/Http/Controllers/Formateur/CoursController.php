@@ -13,8 +13,12 @@ class CoursController extends Controller
     
     public function courses(){
         $cours = Cour::all();
-
         return view('formateur.courses',compact('cours'));
+    }
+    public function showCour($id){
+        $cour = Cour::with('apprenants','chapitres')->find($id);
+        // dd($cour);
+        return view('formateur.showCour',compact('cour'));
     }
     public function createCourse(){
         $categories = Categorie::all()->where('status','=','active');

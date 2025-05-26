@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse ($cours as $cour)
                         <div class="course-card bg-white">
-                            <a href="{{ route('formateur.courses.info', $cour->id) }}">
+                            <a href="{{ route('formateur.courses.showCour', $cour->id) }}">
                                 <img class="course-image" src="{{ asset('Cours/'.$cour->id.'/'.$cour->image) ?: asset('Cours/default-image.jpg') }}" alt="Course Image">
                             </a>
                             <div class="course-body">
@@ -22,15 +22,19 @@
                                     ${{ number_format($cour->prix, 2) }}
                                 </div>
                                 <div class="course-actions">
+                                    <a href="{{ route('formateur.courses.showCour', $cour->id) }}" 
+                                    class="btn-show px-3 py-1 rounded text-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                     <a href="{{ route('formateur.courses.info', $cour->id) }}" 
-                                       class="btn-edit px-3 py-1 rounded text-sm">
-                                        <i class="fas fa-edit mr-1"></i> Modifier
+                                    class="btn-edit px-3 py-1 rounded text-sm">
+                                        <i class="fas fa-edit"></i>
                                     </a>
                                     <form method="POST" action="{{ route('formateur.cours.destroy', $cour->id) }}" class="delete-cours-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-delete px-3 py-1 rounded text-sm">
-                                            <i class="fas fa-trash mr-1"></i>
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
                                 </div>

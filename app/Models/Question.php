@@ -9,7 +9,6 @@ class Question extends Model
     protected $fillable =[
         'question_text','quizze_id'
     ];
-
     public function quizze(){
         return $this->belongTo(Quizze::class,'quizze_id');
     }

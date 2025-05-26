@@ -1,4 +1,4 @@
-<link href="{{ asset('css/apprenantStyle/index.css') }}" rel="stylesheet">       
+<link href="{{ asset('assets/css/apprenantStyle/index.css') }}" rel="stylesheet">       
 @extends('layoutsApprenant.apprenantApp')
 
 @section('content')
@@ -25,12 +25,10 @@
             </div>
         </form>
     </div>
-
     <div class="row">
         @forelse($cours as $cour)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <!-- Category Badge -->
                     @if($cour->categorie)
                     <div class="position-absolute top-0 end-0 m-2">
                         <span class="badge bg-{{ $cour->categorie->couleur ?? 'primary' }}">
@@ -38,9 +36,7 @@
                         </span>
                     </div>
                     @endif
-                    
-                    <!-- Course Image -->
-                    <img src="{{ asset($cour->image ?? 'images/default-course.jpg') }}" 
+                    <img src="{{ asset('Cours/'.$cour->id.'/'.$cour->image ?? 'images/default-course.jpg') }}" 
                          class="card-img-top" 
                          alt="{{ $cour->titre }}"
                          style="height: 180px; object-fit: cover;">
@@ -51,14 +47,13 @@
                             {{ Str::limit($cour->description, 100) }}
                         </p>
                         
-                        <!-- Difficulty and Duration -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
-                                <i class="fas fa-signal text-{{ 
+                                {{-- <i class="fas fa-signal text-{{ 
                                     $cour->difficulte == 'débutant' ? 'success' : 
                                     ($cour->difficulte == 'intermédiaire' ? 'warning' : 'danger') 
                                 }}"></i>
-                                <small class="text-muted ms-1">{{ ucfirst($cour->difficulte) }}</small>
+                                <small class="text-muted ms-1">{{ ucfirst($cour->difficulte) }}</small> --}}
                             </div>
                             <div>
                                 <i class="far fa-clock text-primary"></i>
@@ -66,7 +61,6 @@
                             </div>
                         </div>
                         
-                        <!-- Progress Bar -->
                         <div class="progress mb-3" style="height: 8px;">
                             <div class="progress-bar bg-success" 
                                  role="progressbar" 

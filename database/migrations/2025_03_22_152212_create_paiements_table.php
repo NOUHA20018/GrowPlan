@@ -21,6 +21,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('cour_id')->constrained('cours')->onDelete('cascade');
             $table->timestamp('date_paiement')->nullable(); 
+            $table->string('transaction_id')->nullable(); 
+            $table->string('devise', 5)->default('MAD')->nullable();
+            $table->json('payment_response')->nullable();   
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@
                             @forelse ($cours as $cour)
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('formateur.courses.info', $cour->id) }}">
+                                        <a href="{{ route('formateur.courses.showCour', $cour->id) }}">
                                             <img class="course-image" src="{{ asset('Cours/'.$cour->id.'/'.$cour->image) ?: asset('Cours/default-image.jpg') }}" alt="Course Image">
                                         </a>
                                     </td>
@@ -38,16 +38,20 @@
                                         ${{ number_format($cour->prix, 2) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex space-x-2">
+                                        <div class="flex space-x-2 gap-2">
+                                           <a href="{{ route('formateur.courses.showCour', $cour->id) }}" 
+                                            class="btn-show px-3 py-1 rounded text-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
                                             <a href="{{ route('formateur.courses.info', $cour->id) }}" 
-                                               class="btn-edit px-3 py-1 rounded text-sm">
-                                                <i class="fas fa-edit mr-1"></i> Modifier
+                                            class="btn-edit px-3 py-1 rounded text-sm">
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             <form method="POST" action="{{ route('formateur.cours.destroy', $cour->id) }}" class="delete-cours-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-delete px-3 py-1 rounded text-sm">
-                                                    <i class="fas fa-trash mr-1"></i> Supprimer
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>

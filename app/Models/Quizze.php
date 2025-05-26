@@ -10,10 +10,13 @@ class Quizze extends Model
     protected $fillable = [
         'title','description','chapitre_id','cour_id','user_id'
     ];
-
-    // public function users(){
-    //     return $this->belongsToMany(User::class,'apprenant_quizze','quizze_id','user_id')->where('role',UserTypes::APPRENANT);
-    // }
+    
+    public function apprenants()
+{
+    return $this->belongsToMany(User::class, 'apprenants_quizzes', 'quiz_id', 'apprenant_id')
+                ->withPivot('score', 'date_passage', 'responses_json')
+                ->withTimestamps();
+}
 
     public function chapitre(){
         return $this->belongsTo(Chapitre::class,'chapitre_id');

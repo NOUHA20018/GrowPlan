@@ -64,10 +64,15 @@
             
             .course-actions {
                 display: flex;
+                justify-content: center;
                 gap: 0.5rem;
                 margin-top: 1rem;
             }
             
+            .btn-show {
+                background-color: blue;
+                color: #1a202c;
+            }
             .btn-edit {
                 background-color: #f6ad55;
                 color: #1a202c;

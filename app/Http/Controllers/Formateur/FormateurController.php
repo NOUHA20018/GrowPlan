@@ -14,7 +14,7 @@ class FormateurController extends Controller
 {
     public function index(){
         $cours= Cour::all();
-          $coursCount = Cour::count();
+        $coursCount = Cour::count();
         $chapitresCount = Chapitre::count(); 
         $lastCourse = Cour::orderBy('id', 'desc')->take(5)->get();
         return view('formateur.dashboard',compact('coursCount', 'chapitresCount','cours','lastCourse'));

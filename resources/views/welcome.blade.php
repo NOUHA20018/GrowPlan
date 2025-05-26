@@ -44,8 +44,8 @@
                 
                 <!-- Connection / inscription -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="login.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Connexion</a>
-                    <a href="register.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Inscription</a>
+                    <a href="{{route('login')}}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Connexion</a>
+                    <a href="{{route('register')}}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Inscription</a>
                 </div>
                 
                 

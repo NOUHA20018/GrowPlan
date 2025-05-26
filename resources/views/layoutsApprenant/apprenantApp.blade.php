@@ -10,9 +10,9 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
     <!-- CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/apprenantStyle/app.css')}}">
+
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -32,7 +32,7 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script>
         // Toggle sidebar on mobile

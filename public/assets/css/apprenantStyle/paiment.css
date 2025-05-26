@@ -1,0 +1,267 @@
+/* Main Container */
+.payment-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Payment Card */
+.payment-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Course Summary */
+.course-summary {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.payment-title {
+    font-size: 1.8rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.payment-subtitle {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+.course-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.course-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-details {
+    flex: 1;
+}
+
+.course-name {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.instructor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.instructor i {
+    color: #718096;
+}
+
+.price-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.price-label {
+    font-size: 1rem;
+    color: #4a5568;
+}
+
+.price-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+/* Payment Form */
+.payment-form {
+    padding: 2rem;
+}
+
+.form-title {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.payment-option {
+    position: relative;
+}
+
+.payment-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.payment-option input[type="radio"]:checked + label {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.payment-option input[type="radio"]:focus + label {
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
+}
+
+.method-logo {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.method-logo img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.method-logo i {
+    font-size: 1.5rem;
+    color: #4a5568;
+}
+
+.method-info {
+    flex: 1;
+}
+
+.method-name {
+    display: block;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.2rem;
+}
+
+.method-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+/* Terms Section */
+.terms-section {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.terms-section input[type="checkbox"] {
+    margin-right: 0.8rem;
+}
+
+.terms-link {
+    color: #4299e1;
+    text-decoration: none;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.submit-btn:hover {
+    background: #38a169;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Security Note */
+.security-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.security-note i {
+    color: #48bb78;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .course-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .course-image {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+    }
+    
+    .payment-title {
+        font-size: 1.5rem;
+    }
+}

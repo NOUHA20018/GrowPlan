@@ -1,0 +1,263 @@
+/* Main Container */
+.chapter-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Chapter Header */
+.chapter-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 10px;
+}
+
+.breadcrumb a {
+    color: #4299e1;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.chapter-header h1 {
+    font-size: 1.8rem;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.chapter-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.95rem;
+    color: #718096;
+}
+
+.chapter-meta i {
+    margin-right: 5px;
+}
+
+/* Video Section */
+.video-section {
+    margin-bottom: 40px;
+}
+
+.video-section h2 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.video-wrapper {
+    width: 100%;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.video-wrapper video {
+    width: 100%;
+    display: block;
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f7fafc;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.video-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: #4a5568;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.video-btn:hover {
+    background: #edf2f7;
+    color: #2d3748;
+}
+
+#progress-bar {
+    flex: 1;
+    height: 6px;
+    cursor: pointer;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4299e1;
+    cursor: pointer;
+}
+
+#time-display {
+    font-size: 0.85rem;
+    color: #4a5568;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Resume Section */
+.resume-section {
+    margin-bottom: 40px;
+}
+
+.resume-section h2 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resume-card {
+    display: flex;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.resume-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #e53e3e;
+    margin-right: 20px;
+}
+
+.resume-info {
+    flex: 1;
+}
+
+.resume-info h3 {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+
+.resume-info p {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 15px;
+}
+
+.download-btn, .view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.download-btn {
+    background: #4299e1;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #3182ce;
+}
+
+.view-btn {
+    background: #edf2f7;
+    color: #2d3748;
+}
+
+.view-btn:hover {
+    background: #e2e8f0;
+}
+
+/* Navigation */
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.prev-btn {
+    background: #f7fafc;
+    color: #4a5568;
+}
+
+.prev-btn:hover {
+    background: #edf2f7;
+}
+
+.next-btn, .complete-btn {
+    background: #48bb78;
+    color: white;
+}
+
+.next-btn:hover, .complete-btn:hover {
+    background: #38a169;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chapter-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .resume-card {
+        flex-direction: column;
+    }
+    
+    .resume-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .chapter-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        justify-content: center;
+    }
+}

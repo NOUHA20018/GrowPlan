@@ -1,5 +1,4 @@
 <x-app-layout>
-    @include('layouts.navigationFormateur') 
   <x-slot name="header">
     <link rel="stylesheet" href="{{ asset('assets/css/formateur/listCour.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/formateur/quiz.css') }}">

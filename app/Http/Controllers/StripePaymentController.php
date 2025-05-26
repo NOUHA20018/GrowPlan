@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Cour;
+use App\Models\Paiement;
+use Illuminate\Http\Request;
+use Stripe\Charge;
+use Stripe\Stripe;
+
+class StripePaymentController extends Controller
+{
+   
+    public function showForm()
+    {
+        return view('apprenant.payment');
+    }
+
+
+
+public function makePayment(Request $request, $courId)
+{
+    Stripe::setApiKey(env('STRIPE_SECRET'));
+
+    $token = $request->stripeToken;
+
+    if(!$token) {
+        return back()->withErrors('Stripe token is missing.');
+    }
+    try {
+        $charge = Charge::create([
+            "amount" => $request->amount * 100, 
+            "currency" => "usd",
+            "source" => $token,
+            "description" => "Paiement cours ID: $courId"
+        ]);
+
+        Paiement::create([
+            'montant' => $request->amount,
+            'methode_paiement' => 'stripe',
+            'statut' => 'payé',
+            'user_id' => auth()->id(),
+            'cour_id' => $courId,
+            'date_paiement' => now(),
+            'transaction_id' => $charge->id,
+            'devise' => 'USD',
+            'payment_response' => json_encode($charge)
+        ]);
+        $cour = Cour::find($courId);
+        $formateur = $cour->user;
+        $formateur->total_earnings += $request->amount;
+        $formateur->save();
+
+        return redirect()->route('apprenant.cours.show',$courId)->with('success', 'Paiement réussi !');
+    } catch (\Exception $e) {
+        return redirect()->route('apprenant.cours.show',$courId)->withErrors($e->getMessage());
+    }
+}
+
+
+}

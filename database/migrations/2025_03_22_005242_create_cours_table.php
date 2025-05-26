@@ -20,6 +20,8 @@ return new class extends Migration
             $table->datetime('date_creation');
             $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            
+
             $table->timestamps();
         });
     }

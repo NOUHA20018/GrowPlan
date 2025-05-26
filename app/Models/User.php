@@ -26,18 +26,23 @@ class User extends Authenticatable
         'role' => 'integer',
     ];
 
-    public function apprenantQuizzes()
+    public function notifications()
     {
-        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id')
-        ->where('role',UserTypes::APPRENANT);
+        return $this->hasMany(Notification::class);
+    }
+    public function quizzes()
+    {
+         return $this->belongsToMany(Quizze::class, 'apprenants_quizzes', 'apprenant_id', 'quiz_id')
+         ->withPivot('score', 'date_passage', 'responses_json')
+         
+                ->withTimestamps();
     }
 
-public function formateurQuizzes()
+    public function formateurQuizzes()
     {
-        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id')
-           ->where('role',UserTypes::FORMATEUR);
+        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id');
+               
     }
-
     public function paiements(){
         return $this->hasMany(Paiement::class);
     }
@@ -45,10 +50,37 @@ public function formateurQuizzes()
         return $this->hasMany(Cour::class);
     }
 
+    public function cours_valides()
+    {
+        return $this->hasMany(Cour::class, 'admin_id')
+        ->where('status', 'valide');
+    }
+    public function formateur_cours_valides()
+    {
+        return $this->hasMany(Cour::class, 'user_id') 
+                    ->where('status', 'valide'); 
+    }
+    public function formateur_cours_refuses()
+    {
+        return $this->hasMany(Cour::class, 'user_id') 
+                    ->where('status', 'refuse'); 
+    }
+    public function cours_refuses()
+{
+    return $this->hasMany(Cour::class, 'admin_id') 
+        ->where('st atus', 'refuse');
+}
     public function apprenant_cours()
     {
-        return $this->belongsToMany(Cour::class, 'apprenant_cours', 'user_id', 'cour_id')
+        return $this->belongsToMany(Cour::class, 'progressions', 'user_id', 'cour_id')
                     ->withPivot('progression')
+                    ->withTimestamps();
+    }
+
+    public function coursInscrits()
+    {
+        return $this->belongsToMany(Cour::class, 'inscriptions', 'user_id', 'cour_id')
+                    ->withPivot('inscrit_le', 'status')
                     ->withTimestamps();
     }
 
@@ -56,6 +88,8 @@ public function formateurQuizzes()
         return $this->hasMany(Categorie::class)
         ->whereIn('role', [UserTypes::FORMATEUR, UserTypes::ADMIN]);
     }
+
+    
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -1,68 +1,185 @@
-<x-app-layout>
-  <x-slot name="header">
-    <h2 class=" m-2 p-3 font-semibold text-xl text-gray-800 leading-tight">
-      <link rel="stylesheet" href="{{asset('assets/css/formateur/showCour.css')}}">
-      <link  rel="stylesheet" href="{{asset('assets/css/formateur/listCour.css')}}">
-      📘 {{ $chapitre->title }}
-    </h2>
-  </x-slot>
-  <div class="form-container">
-    {{-- <div class="left-column">
-          <div class="chapters-header">
-            <h3 class="chapters-title">📚 Chapitres</h3> --}}
-            {{-- <a href="{{ route('formateur.chapters.create', $cours->id) }}" class="add-chapter-btn">+ Ajouter un chapitre</a> --}}
-          </div>
-          
-          {{-- <div class="chapters-list"> --}}
-            {{-- @foreach ($chapitres as $chapitre)
-              <a href="{{ route('formateur.chapters.show', $chapitre->id) }}" class="chapter-item">
-                📘 {{ $chapitre->title }}
-              </a>
-            @endforeach --}}
-          {{-- </div>
-    </div>
-  <div class="right-column"> --}}
-    <div class=" py-6 px-4 max-w-3xl mx-auto bg-white rounded shadow">
-    <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden max-w-md mx-auto">
-      <div class="p-4">
-        <p class="text-lg font-semibold text-gray-800 dark:text-white">Chapitre </p>
-      </div>
-     <div class="flex justify-center">
-       <video style="width: 60%" class="object-cover rounded mx-auto" controls poster="{{ asset('chapitres/'.$chapitre->id.'/thumbnail.jpg') }}">
-        <source src="{{ asset('chapitres/'.$chapitre->id.'/'.$chapitre->video) }}" type="video/mp4">
-          Votre navigateur ne supporte pas la vidéo.
-        </video>
-      </div>
-      
-      {{-- Résumé du chapitre --}}
-      <div class="flex justify-center">
-      @if($chapitre->resume)
-        @php
-          $extension = pathinfo($chapitre->resume, PATHINFO_EXTENSION);
-          $path = asset('resumes/'.$chapitre->id.'/'.$chapitre->resume);
-        @endphp
+<link href="{{ asset('assets/css/apprenantStyle/index.css') }}" rel="stylesheet">    
+<link href="{{ asset('assets/css/apprenantStyle/chapitre.css') }}" rel="stylesheet">    
 
-        <div class="p-4 " style="width: 60% ">
-          <h4 class="text-md font-bold text-gray-700 dark:text-gray-200 mb-2">📄 Résumé</h4>
-          @if($extension === 'pdf')
-            <object data="{{ $path }}" type="application/pdf" width="100%" height="400px">
-              <p>Ce fichier ne peut pas être affiché. 
-                <a href="{{ $path }}" class="text-blue-500 underline">Téléchargez-le</a>.
-              </p>
-            </object>
-          @elseif(in_array($extension, ['docx','pptx','xlsx']))
-            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src={{ urlencode($path) }}" width="100%" height="400px" frameborder="0"></iframe>
-          @else
-            <a href="{{ $path }}" download class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow block text-center">
-              📥 Télécharger le résumé
+@extends('layoutsApprenant.apprenantApp')
+
+
+@section('content')
+<div class="chapter-container">
+    <!-- Chapter Header -->
+    <div class="chapter-header">
+        <div class="breadcrumb">
+            <a href="{{ route('apprenant.cours.show', $chapitre->cour_id) }}">
+                <i class="fas fa-arrow-left"></i> Retour au cours
             </a>
-          @endif
-        </div>  
-      @endif
-      </div>
+            <span> / {{ $chapitre->title }}</span>
+        </div>
+        <h1>{{ $chapitre->title }}</h1>
+        <div class="chapter-meta">
+            <span class="duration"><i class="far fa-clock"></i> {{ $chapitre->duree }} min</span>
+            <span class="course-name">{{ $chapitre->cour->title }}</span>
+        </div>
     </div>
+
+    <!-- Video Section -->
+    @if($chapitre->video)
+    <div class="video-section">
+        <h2><i class="fas fa-play-circle"></i> Vidéo du chapitre</h2>
+        <div class="video-wrapper">
+            <video id="chapter-video" controls controlsList="nodownload">
+                <source src="{{ asset('chapitres/'.$chapitre->id.'/'.$chapitre->video) }}" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+        </div>
+        <div class="video-controls">
+            <button id="play-pause" class="video-btn"><i class="fas fa-play"></i></button>
+            <input type="range" id="progress-bar" min="0" max="100" value="0">
+            <span id="time-display">00:00 / 00:00</span>
+            <button id="fullscreen" class="video-btn"><i class="fas fa-expand"></i></button>
+        </div>
     </div>
-  </div>
-  
-  </div>
-</x-app-layout>
+    @endif
+
+    <!-- Resume Section -->
+    @if($chapitre->resume)
+    <div class="resume-section">
+        <h2><i class="fas fa-file-alt"></i> Ressources du chapitre</h2>
+        <div class="resume-card">
+            @php
+                $extension = pathinfo($chapitre->resume, PATHINFO_EXTENSION);
+                $icon = '';
+                $type = '';
+                
+                switch(strtolower($extension)) {
+                    case 'pdf':
+                        $icon = 'fa-file-pdf';
+                        $type = 'Document PDF';
+                        break;
+                    case 'doc':
+                    case 'docx':
+                        $icon = 'fa-file-word';
+                        $type = 'Document Word';
+                        break;
+                    case 'ppt':
+                    case 'pptx':
+                        $icon = 'fa-file-powerpoint';
+                        $type = 'Présentation';
+                        break;
+                    case 'xls':
+                    case 'xlsx':
+                        $icon = 'fa-file-excel';
+                        $type = 'Fichier Excel';
+                        break;
+                    default:
+                        $icon = 'fa-file-download';
+                        $type = 'Fichier à télécharger';
+                }
+            @endphp
+            
+            <div class="resume-icon">
+                <i class="fas {{ $icon }}"></i>
+            </div>
+            <div class="resume-info">
+                <h3>Résumé du chapitre</h3>
+                <p>{{ $type }} - {{ strtoupper($extension) }}</p>
+                <a href="{{ asset('chapitres/'.$chapitre->id.'/'.$chapitre->resume) }}" download class="download-btn">
+                    <i class="fas fa-download"></i> Télécharger
+                </a>
+                @if(in_array(strtolower($extension), ['pdf', 'doc', 'docx', 'ppt', 'pptx']))
+                <a href="{{ route('apprenant.viewResume', $chapitre->id) }}" target="_blank" class="view-btn">
+                    <i class="fas fa-eye"></i> Visualiser
+                </a>
+                @endif
+            </div>
+        </div>
+    </div>
+    @endif
+
+
+    <div class="chapter-navigation">
+        @if($previousChapter)
+        <a href="{{ route('apprenant.showChapter', $previousChapter->id) }}" class="nav-btn prev-btn">
+            <i class="fas fa-chevron-left"></i> Chapitre précédent
+        </a>
+        @endif
+        
+        @if($nextChapter)
+        <a href="{{ route('apprenant.showChapter', $nextChapter->id) }}" class="nav-btn next-btn">
+            Chapitre suivant <i class="fas fa-chevron-right"></i>
+        </a>
+        @else
+        <a href="{{ route('apprenant.cours.show', $chapitre->cour_id) }}" class="nav-btn complete-btn">
+            <i class="fas fa-check-circle"></i> Terminer le cours
+        </a>
+        @endif
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('chapter-video');
+    const playPauseBtn = document.getElementById('play-pause');
+    const progressBar = document.getElementById('progress-bar');
+    const timeDisplay = document.getElementById('time-display');
+    const fullscreenBtn = document.getElementById('fullscreen');
+    
+    if(video) {
+        // Play/Pause toggle
+        playPauseBtn.addEventListener('click', function() {
+            if(video.paused) {
+                video.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+        
+        // Update progress bar
+        video.addEventListener('timeupdate', function() {
+            const percent = (video.currentTime / video.duration) * 100;
+            progressBar.value = percent;
+            
+            // Update time display
+            const currentMins = Math.floor(video.currentTime / 60);
+            let currentSecs = Math.floor(video.currentTime % 60);
+            if(currentSecs < 10) currentSecs = '0' + currentSecs;
+            
+            const durationMins = Math.floor(video.duration / 60);
+            let durationSecs = Math.floor(video.duration % 60);
+            if(durationSecs < 10) durationSecs = '0' + durationSecs;
+            
+            timeDisplay.textContent = `${currentMins}:${currentSecs} / ${durationMins}:${durationSecs}`;
+        });
+        
+        // Seek video when progress bar changes
+        progressBar.addEventListener('input', function() {
+            const seekTime = (progressBar.value / 100) * video.duration;
+            video.currentTime = seekTime;
+        });
+        
+        // Fullscreen toggle
+        fullscreenBtn.addEventListener('click', function() {
+            if(video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if(video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if(video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        });
+        
+        // Update play/pause icon when video is played/paused
+        video.addEventListener('play', function() {
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        });
+        
+        video.addEventListener('pause', function() {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+    }
+});
+</script>
+@endsection
