@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Formateur;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewCategorieCreated;
 use App\Models\Categorie;
 use App\Models\Chapitre;
 use App\Models\Cour;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
 
@@ -52,12 +56,20 @@ class CategorieController extends Controller
              $req->file('image')->move($image_path,$categorie->image);
         };
         $from = $req->query('from');
-            // dd($validatedData['creator'] );
-            // $redirectTo = session()->pull('previous_url', 'formateur/categories');
-            // return redirect($redirectTo)->with('success','Categorie a bien été crée.');
             if ($from === 'cours') {
                 return redirect()->route('formateur.courses.create')->with('success', 'Catégorie ajoutée avec succès.');
             }
+            $admin=User::where('role',1)->first();
+            $adminId=$admin->id;
+            // dd($adminId);
+            Mail::to($admin->email)->send(new NewCategorieCreated($categorie));
+            Notification::create([
+                 'user_id' => $adminId,
+                'actor_id' => auth()->id(), 
+                'type' => 'new_categorie',
+                'message' => 'Nouveau categorie: ' . $categorie->title,
+                'is_read' => false,
+            ]);
             return redirect()->route('formateur.categories.index')->with('success', 'Catégorie ajoutée avec succès.');
         }
        

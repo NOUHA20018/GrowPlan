@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function formateurQuizzes()
     {
-        return $this->belongsToMany(Quizze::class, 'apprenant_quizze', 'user_id', 'quizze_id');
+        return $this->hasMany(Quizze::class);
                
     }
     public function paiements(){
@@ -76,6 +76,11 @@ class User extends Authenticatable
                     ->withPivot('progression')
                     ->withTimestamps();
     }
+    public function apprenantChapitreInscrit(){
+        return $this->hasManyThrough(
+            Chapitre::class,Cour::class,
+        );
+    }
 
     public function coursInscrits()
     {
@@ -88,6 +93,19 @@ class User extends Authenticatable
         return $this->hasMany(Categorie::class)
         ->whereIn('role', [UserTypes::FORMATEUR, UserTypes::ADMIN]);
     }
+    public function inscriptionsApprenants()
+    {
+        return $this->hasManyThrough(
+           Inscription::class, // module li bagha nwsl lih 
+        Cour::class,        // module wasit(cour)
+        'user_id', //krbt user b cour
+        'cour_id', // KYRBT COUR B INSCRIPTION
+        'id',      // dial users
+        'id'       //dial cours
+    );
+    }
+
+
 
     
     /**

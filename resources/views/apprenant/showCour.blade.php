@@ -1,11 +1,11 @@
-<link href="{{ asset('assets/css/apprenantStyle/index.assets/css') }}" rel="stylesheet">       
+<link href="{{ asset('assets/css/apprenantStyle/index.css') }}" rel="stylesheet">       
 <link href="{{ asset('assets/css/apprenantStyle/show.css') }}" rel="stylesheet">
 @extends('layoutsApprenant.apprenantApp')
 
 @section('content')
 <div class="course-show-container ">
     @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     @if(session('info'))
         <div class="alert alert-info">{{ session('info') }}</div>
@@ -94,7 +94,18 @@
                     <div class="quiz-questions">{{$quiz->questions->count()}} question</div>
                     </div>
                      <div class="quiz-arrow">
-                        @if($isInscrit)
+                        @php
+                        $user=App\Models\User::find(Auth()->id());
+                        $pivot =$user->quizzes()->where('quiz_id',$quiz->id)->first();
+                        if($pivot){
+                        $Inscrit = ($pivot->pivot->apprenant_id == $user->id)? true:false;
+                        }else{
+                            $Inscrit=null;
+                        }
+                        @endphp
+                        @if($Inscrit)
+                        <a class="quiz-btn" href="{{ route('apprenant.reponses_correct', $quiz->id) }}"> Resultat</a>
+                        @elseif($isInscrit)
                             <a class="quiz-btn" href="{{ route('apprenant.showQuiz', $quiz->id) }}">Commencer</a>
                         @else
                             <span title="Veuillez vous inscrire pour accéder">🔒</span>

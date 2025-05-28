@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Formateur;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewCourseCreated;
 use App\Models\Categorie;
 use App\Models\Chapitre;
 use App\Models\Cour;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CoursController extends Controller
 {
@@ -15,11 +19,23 @@ class CoursController extends Controller
         $cours = Cour::all();
         return view('formateur.courses',compact('cours'));
     }
-    public function showCour($id){
+    public function showCour(Cour $cour ,$id){
         $cour = Cour::with('apprenants','chapitres')->find($id);
-        // dd($cour);
+        $cour->load(['apprenant_cours' => function($query) use ($cour) {
+            $query->withPivot('progression');
+        }]);
+        
         return view('formateur.showCour',compact('cour'));
     }
+    
+       public function  deleteApprenant($id){
+        $apprenant = User::where('role',3)->find($id);
+        $apprenant->coursInscrits()->detach() ;
+        return redirect()->back()->with('success', 'L\'apprenant a été désinscrit de tous les cours.');
+       }
+
+
+
     public function createCourse(){
         $categories = Categorie::all()->where('status','=','active');
         $from='';
@@ -34,7 +50,7 @@ class CoursController extends Controller
             'categorie_id'=> ['required'],
             'image' =>['image','nullable','mimes:jpg,bmp,png']
         ]);
-        // dd($validatedData['image']);
+        
         $imagename= '';
         $hasfile = $req->hasFile('image');
         if($hasfile){ 
@@ -48,6 +64,16 @@ class CoursController extends Controller
         if($hasfile){
             $req->file('image')->move($image_path,$cour->image);
         }
+        $admin = User::where('role', 1)->first();
+        Mail::to($admin->email)->send(new NewCourseCreated($cour));
+        $userId =$admin->id;
+       Notification::create([
+            'user_id' => $userId,
+            'actor_id' => auth()->id(), 
+            'type' => 'new_course',
+            'message' => 'Nouveau cours: ' . $cour->title,
+            'is_read' => false,
+        ]);
         return redirect()->route('formateur.courses')->with('success', 'Le cours a bien été ajouté.');
     }
 

@@ -62,7 +62,7 @@
   background-color: #574bff;
 }
 
-/* Card styling */
+Card styling
 .category-card {
   background-color: #fff;
   border-radius: 15px;
@@ -390,3 +390,5 @@ header {
 .filter-button.reset {
   background-color: var(--filter-reset);
 }
+
+

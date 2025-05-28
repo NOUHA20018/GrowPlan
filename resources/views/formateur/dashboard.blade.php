@@ -20,7 +20,7 @@
 
                 <div class="bg-white rounded-2xl shadow p-6 flex-1 min-w-[250px]">
                     <h2 class="text-lg font-semibold text-gray-700">👩‍🎓 Étudiants inscrits</h2>
-                    <p class="text-3xl font-bold text-purple-600 mt-2">23</p>
+                    <p class="text-3xl font-bold text-purple-600 mt-2">{{$inscripteurCount}}</p>
                 </div>
             </div>
         </div>
@@ -50,9 +50,7 @@
                                 </th>
                                 <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Description </th>
                                 <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Prix 
-                                   {{-- <button onclick="toggleFilterMenu('filter-prix')" class="ml-1 text-gray-500">
-                                      <i class="fas fa-filter"></i>
-                                  </button> --}}
+
                                   <div id="filter-prix" class="hidden absolute z-10 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
                                       <div class="p-2 max-h-60 overflow-y-auto"></div>
                                   </div>
@@ -63,20 +61,20 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
-                            @foreach($lastCourse as $index => $course)
+                            @foreach($lastCourse as $index => $cour)
                                 <tr>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">{{ $course->title }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">{{ Str::limit($course->description, 50) }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $course->prix ?? '—' }} MAD</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $course->chapitres->count() }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $course->created_at->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">{{ $cour->title }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">{{ Str::limit($cour->description, 50) }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $cour->prix ?? 'free' }} MAD</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $cour->chapitres()->count() }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">{{ $cour->created_at->format('d/m/Y') }}</td>
                                     <td class="px-6 py-4 flex justify-center gap-2">
-                                        <a href="{{ route('formateur.courses.info', $course->id) }}" style="background-color: darkseagreen"
+                                        <a href="{{ route('formateur.courses.info', $cour->id) }}" style="background-color: darkseagreen"
                                          class=" hover:bg-blue-700 text-black text-sm font-medium px-3 py-1 rounded-lg">
                                             More info
                                         </a>
-                                        <form  action="{{ route('formateur.cours.destroy', $course->id) }}" method="POST"
+                                        <form  action="{{ route('formateur.cours.destroy', $cour->id) }}" method="POST"
                                               onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')">
                                             @csrf
                                             @method('DELETE')

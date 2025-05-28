@@ -25,34 +25,27 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <!-- Logo -->
                     <a href="#" class="flex-shrink-0 flex items-center">
-                        <svg class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
-                        </svg>
+                       <img src="{{asset('assets/img/logo.png')}}" alt="" width="60px">
                         <span class="ml-2 text-xl font-bold text-gray-800">Smart Growth</span>
                     </a>
                     
-                    <!-- navbar -->
                     <div class="hidden md:ml-10 md:flex md:space-x-8">
                         <a href="#" class="text-blue-600 border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Accueil</a>
-                        <a href="#" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Cours</a>
-                        <a href="#" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Formateurs</a>
+                        <a href="#courses" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Cours</a>
+                        <a href="#formateurs" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">Formateurs</a>
                         <a href="#about" class="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">À propos</a>
                     </div>
                 </div>
                 
-                <!-- Connection / inscription -->
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="{{route('login')}}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Connexion</a>
                     <a href="{{route('register')}}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Inscription</a>
                 </div>
                 
-                
                 <div class="-mr-2 flex items-center md:hidden">
                     <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
-                        
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -62,7 +55,6 @@
         </div>
     </nav>
 
-    {{-- hero --}}
     <div class="hero-gradient text-white">
         <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -73,7 +65,7 @@
                     La plateforme idéale pour les formateurs et apprenants souhaitant une solution simple et puissante.
                 </p>
                 <div class="mt-10 flex justify-center space-x-4">
-                    <a href="register.html" class="bg-white text-blue-600 px-8 py-3 rounded-md text-base font-medium hover:bg-gray-100 md:py-4 md:text-lg md:px-10">
+                    <a href="{{route('register')}}" class="bg-white text-blue-600 px-8 py-3 rounded-md text-base font-medium hover:bg-gray-100 md:py-4 md:text-lg md:px-10">
                         Commencer gratuitement
                     </a>
                     <a href="#courses" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-md text-base font-medium hover:bg-white hover:text-blue-600 md:py-4 md:text-lg md:px-10">
@@ -127,104 +119,40 @@
             </div>
 
             <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Course Card 1 -->
+                <!-- Course Card  -->
+                @foreach ($lastCourse as $cour)
                 <div class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt="Course image">
+                    <img class="h-48 w-full object-cover" src="{{asset('Cours/'.$cour->id.'/'.$cour->image)}}" alt="{{$cour->title}}">
                     <div class="p-6">
                         <div class="flex items-center">
                             <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                                Développement
+                                {{$cour->categorie->title}}
                             </span>
                         </div>
                         <a href="#" class="block mt-2">
-                            <h3 class="text-xl font-semibold text-gray-900">Laravel pour débutants</h3>
+                            <h3 class="text-xl font-semibold text-gray-900">{{$cour->title}}</h3>
                             <p class="mt-3 text-base text-gray-500">
-                                Apprenez les bases du framework PHP Laravel en 10 chapitres.
+                                 <span class="short-description">{{ Str::limit($cour->description, 50) }}</span>
+                                    @if(strlen($cour->description) > 50)
+                                        <span class="full-description hidden">{{ $cour->description }}</span>
+                                        <span class="description-toggle">Voir plus</span>
+                                    @endif
                             </p>
                         </a>
                         <div class="mt-6 flex items-center">
                             <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Formateur">
+                                {{-- <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Formateur"> --}}
                             </div>
                             <div class="ml-3">
                                 <p class="text-sm font-medium text-gray-900">
-                                    Ahmed Z.
+                                    {{$cour->user->name}} {{$cour->user->prenom}}
                                 </p>
-                                <div class="flex space-x-1 text-sm text-gray-500">
-                                    <span>12 leçons</span>
-                                    <span aria-hidden="true">&middot;</span>
-                                    <span>4h30</span>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Course Card 2 -->
-                <div class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Course image">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                Marketing
-                            </span>
-                        </div>
-                        <a href="#" class="block mt-2">
-                            <h3 class="text-xl font-semibold text-gray-900">Marketing Digital 101</h3>
-                            <p class="mt-3 text-base text-gray-500">
-                                Maîtrisez les fondamentaux du marketing digital en 2023.
-                            </p>
-                        </a>
-                        <div class="mt-6 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Formateur">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">
-                                    Fatima E.
-                                </p>
-                                <div class="flex space-x-1 text-sm text-gray-500">
-                                    <span>8 leçons</span>
-                                    <span aria-hidden="true">&middot;</span>
-                                    <span>3h15</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Card 3 -->
-                <div class="course-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300">
-                    <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Course image">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                                Design
-                            </span>
-                        </div>
-                        <a href="#" class="block mt-2">
-                            <h3 class="text-xl font-semibold text-gray-900">UI/UX avec Figma</h3>
-                            <p class="mt-3 text-base text-gray-500">
-                                Concevez des interfaces utilisateur modernes avec Figma.
-                            </p>
-                        </a>
-                        <div class="mt-6 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Formateur">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">
-                                    Karim M.
-                                </p>
-                                <div class="flex space-x-1 text-sm text-gray-500">
-                                    <span>15 leçons</span>
-                                    <span aria-hidden="true">&middot;</span>
-                                    <span>6h00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            @endforeach
             </div>
 
             <div class="mt-12 text-center">
@@ -247,7 +175,7 @@
             <p class="mt-4 text-lg leading-6 text-blue-200">
                 Rejoignez notre communauté de formateurs et apprenants dès aujourd'hui.
             </p>
-            <a href="register.html" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 sm:w-auto">
+            <a href="{{route('register')}}" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 sm:w-auto">
                 Créer un compte gratuit
             </a>
         </div>

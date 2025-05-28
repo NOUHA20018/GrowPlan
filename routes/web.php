@@ -39,6 +39,8 @@ Route::middleware(['auth', 'formateur'])->name('formateur.')->group(function () 
     ->where('id', '\d+')->name('courses.showCour');
     Route::patch('formateur/courses/{id}/update',[CoursController::class,'updateCourses'])->name('update.courses');
     Route::delete('forurmateur/courses/{id}/destroy',[CoursController::class,'destroyCours'])->name('cours.destroy');
+    Route::delete( 'deleteApprenant/{id}',  [CoursController::class,'deleteApprenant'])->name('deleteApprenant');
+
     
     // Categories Management
     Route::get('formateur/categories', [CategorieController::class, 'listCategories'])->name('categories.index');
@@ -82,11 +84,11 @@ Route::controller(ApprenantController::class)->middleware(['auth', 'apprenant'])
     Route::get('apprenant/index',  'index')->name('index');
     Route::get('apprenant/cours/{id}',  'show')->name('cours.show');
     Route::get('apprenant/cour/chapitre/{chapitre}',  'showChapter')->name('showChapter');
-    Route::get('apprenant/cour/quiz/{id}',  'showQuiz')->name('showQuiz');
     Route::get('apprenant/cour/Resume/{id}',  'viewResume')->name('viewResume');
     Route::get('apprenant/cour/sinscrire/{id}',  'sinscrire')->name('sinscrire');
     Route::get('apprenant/cour/paiement/{id}',  'paiement')->name('paiement');
     Route::post('apprenant/cour/reponses/{id}',  'reponses')->name('reponses');
+    Route::get('apprenant/cour/quiz/{id}',  'showQuiz')->name('showQuiz');
     Route::get('apprenant/cour/reponses_correct/{id}',  'reponses_correct')->name('reponses_correct');
     
     
@@ -111,6 +113,8 @@ Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 
     
     Route::get('/formateurs',  'formateurs')->name('admin.formateurs');
     Route::get('/apprenants',  'apprenants')->name('admin.apprenants');
+    Route::delete('/deleteFormateur/{id}',  'deleteFormateur')->name('admin.deleteFormateur');
+    Route::get('/notifications',  'notifications')->name('admin.notifications');
 });
 
 

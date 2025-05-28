@@ -49,26 +49,23 @@
                         
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
-                                {{-- <i class="fas fa-signal text-{{ 
-                                    $cour->difficulte == 'débutant' ? 'success' : 
-                                    ($cour->difficulte == 'intermédiaire' ? 'warning' : 'danger') 
-                                }}"></i>
-                                <small class="text-muted ms-1">{{ ucfirst($cour->difficulte) }}</small> --}}
+                                @if($cour->chapitres()->count()>0)
+                                {{$cour->chapitres()->count()}} Chapitres
+                                @endif
                             </div>
-                            <div>
-                                <i class="far fa-clock text-primary"></i>
-                                <small class="text-muted ms-1">{{ $cour->duree }} heures</small>
-                            </div>
+                            
                         </div>
-                        
-                        <div class="progress mb-3" style="height: 8px;">
-                            <div class="progress-bar bg-success" 
-                                 role="progressbar" 
-                                 style="width: {{ rand(0, 100) }}%" 
-                                 aria-valuenow="{{ rand(0, 100) }}" 
-                                 aria-valuemin="0" 
-                                 aria-valuemax="100"></div>
-                        </div>
+                        @php
+                        $progression = auth()->user()->apprenant_cours()
+                            ->where('cour_id', $cour->id)
+                            ->first()?->pivot->progression ?? 0;
+                    @endphp
+
+                
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{$progression}}%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                      
                     </div>
                     
                     <div class="card-footer bg-white border-top-0">

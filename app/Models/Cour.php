@@ -11,7 +11,7 @@ class Cour extends Model
         'title','description','image','prix','date_creation','categorie_id','user_id','status','admin_id'
     ];
     public function chapitres(){
-        return $this->hasMany(Chapitre::class);
+        return $this->hasMany(Chapitre::class,'cour_id');
     }
     public function quizzes(){
         return $this->hasMany(Quizze::class);

@@ -9,12 +9,16 @@ use App\Models\Chapitre;
 use App\Models\Cour;
 use App\Models\Inscription;
 use App\Models\Quizze;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class ApprenantController extends Controller
 {
     public function dashboard(){
-        return view('apprenant.dashboard');
+    $lastCours = Cour::latest()->limit(5)->get();
+        return view('apprenant.dashboard',compact('lastCours'));
     }
    public function index(Request $request)
     {
@@ -27,21 +31,7 @@ class ApprenantController extends Controller
         
         return view('apprenant.index', compact('cours', 'categories'));
     }
-//    public function show(Cour $cour)
-    // {
-    //     $cour->load([
-    //         'chapitres' => function($query) {
-    //             $query->orderBy('created_at')->withCount('quizzes');
-    //         },
-    //         'chapitres.quizzes' => function($query) {
-    //             $query->withCount('questions');
-    //         },
-    //         'user',
-    //         'categorie'
-    //     ]);
-
-    //     return view('apprenant.showCour', compact('cour'));
-    // }  
+  
     public function show( $id)
     {
     $cour = Cour::with('chapitres','user','categorie')->find($id);
@@ -80,28 +70,45 @@ class ApprenantController extends Controller
 
     public function showQuiz($id){
         $quiz = Quizze::with('questions.reponses_possible')->findOrFail($id);
+        $user=User::find(Auth()->id());
+        $pivot =$user->quizzes()->where('quiz_id',$id)->first();
+        if($pivot){
+            $isInscrit = ($pivot->pivot->apprenant_id == $user->id)? true:false;
+            if($isInscrit){
+                $apprenant = User::find(Auth::id()); 
+                $pivot = $apprenant->quizzes()->where('quiz_id', $id)->first()->pivot;
+                $responses = json_decode($pivot->responses_json, true); 
+                return view('apprenant.reponses_correct', compact('quiz', 'responses', 'pivot'));
+            }
+        }
+        
         return view('apprenant.showQuiz',compact('quiz'));
     }
 
     public function reponses(Request $req,$id){
-        // dd($req->option_text);
         $quiz = Quizze::with('questions.reponses_possible')->findOrFail($id);
+        $user = Auth()->user();
+        $nbQuestion = $quiz->questions()->count();
+        $nbChapitre=$user->apprenantChapitreInscrit()->count();
+        $progression=0;
         $score = 0;
-        $responses_json = [];
-       
+        $responses_json = [];       
         foreach($quiz->questions as $question){
             $questionId=$question->id;
             if(isset($req->option_text[$questionId])){
                 $selectedReponseId = $req->option_text[$questionId];
                 $responses_json[$questionId] = $selectedReponseId;
                 $correctAnswer = $question->reponses_possible->firstWhere('is_correct', 1);
-
                 if ($correctAnswer && $selectedReponseId == $correctAnswer->id) {
                     $score++;
                 }
-                
-                
             }
+        }
+         $total = $nbQuestion + $nbChapitre;
+        if ($total > 0) {
+            $progression = ($score / $total) * 100;
+        } else {
+            $progression = 0;
         }
         $reponse=new apprenants_quizzes();
         $reponse->apprenant_id=Auth()->id();
@@ -110,14 +117,28 @@ class ApprenantController extends Controller
         $reponse->responses_json= json_encode($responses_json);;
         $reponse->score=$score;
         $reponse->save();   
-        return redirect()->route('apprenant.reponses_correct',$id)->with('success', 'Quiz soumis avec succès. Score : ' . $score);
+       if ($quiz->cour_id) {
+        if (!$user->apprenant_cours->contains($quiz->cour_id)) {
+            $user->apprenant_cours()->attach($quiz->cour_id, ['progression' => $progression]);
+        } else {
+            $user->apprenant_cours()->updateExistingPivot($quiz->cour_id, ['progression' => $progression]);
+        }
+    }
+    return redirect()->route('apprenant.reponses_correct',$id)->with('success', 'Quiz soumis avec succès. Score : ' . $score);
 
     }
     public function reponses_correct($id){
-        $quiz =Quizze::with('questions.reponses_possible')->find($id);
-        dd($quiz);
-        return view('apprenant.reponses_correct',compact('quiz'));
-    }
+        $quiz =Quizze::with(['questions.reponses_possible','apprenants'])->find($id);
+        $progression=auth()->user()->apprenant_cours()->where('cour_id',$quiz->cour_id)->first()?->pivot->progression;
+         $apprenant = User::find(Auth::id()); 
+        //  dd($apprenant);
+        $pivot = $apprenant->quizzes()->where('quiz_id', $id)->first();
+        if($pivot){
+            $responses = json_decode($pivot->pivot->responses_json, true); 
+            return view('apprenant.reponses_correct', compact('quiz', 'responses', 'pivot','progression'));
+        }
+        return view('apprenant.showQuiz',compact('quiz'));
+}
         public function sinscrire($id){
             $user = Auth()->user();
             $cour = Cour::find($id);

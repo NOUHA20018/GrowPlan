@@ -210,15 +210,13 @@
     margin-left: 1rem;
 }
 .quiz-btn {
-    background-color: #3490dc; /* bleu moderne */
+    background-color: #3490dc; 
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 5px 5px;
     border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    font-weight: semibold;
+    
 }
 
 .quiz-btn:hover {
