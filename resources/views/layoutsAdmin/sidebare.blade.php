@@ -9,8 +9,6 @@
         <i class="fas fa-user-cog text-xl mr-2"></i>
         <span class="text-xl font-semibold">Admin Panel</span>
       </div>
-
-      
       <div class="md:hidden flex items-center space-x-4">
         
         <a href="{{ route('admin.notifications') }}" class="relative p-2 rounded-full hover:bg-blue-700">
@@ -25,13 +23,10 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-
-      
       <div class="hidden md:flex items-center space-x-1">
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : 'hover:bg-blue-700' }} px-3 py-2 rounded-md text-sm font-medium flex items-center">
           <i class="fas fa-chart-line mr-1"></i> Dashboard
         </a>
-
         <a href="{{ route('admin.cours.attente') }}" class="{{ request()->routeIs('admin.cours.attente') ? 'bg-blue-700' : 'hover:bg-blue-700' }} px-3 py-2 rounded-md text-sm font-medium flex items-center">
           <i class="fas fa-hourglass-half mr-1"></i> Cours en attente
           @if($enAttenteCount > 0)

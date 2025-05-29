@@ -1,31 +1,15 @@
-/* Dashboard Container */
 .container {
     max-width: 1200px;
 }
-
-/* Card common styles */
-.bg-white.rounded-lg.shadow-md {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Headings in colored headers */
 .bg-blue-600 h3, .bg-green-600 h3, .bg-red-600 h3 {
     font-weight: 600;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.125rem; 
 }
-
-/* Buttons */
 button, a.px-3.py-1 {
     font-weight: 600;
     transition: background-color 0.2s ease;
 }
 
-/* Buttons colors for actions */
-.bg-blue-100:hover { background-color: #bfdbfe; }   /* lighter blue */
-.bg-green-100:hover { background-color: #bbf7d0; }  /* lighter green */
-.bg-red-100:hover { background-color: #fecaca; }    /* lighter red */
-
-/* Table Styling */
 table.min-w-full {
     border-collapse: collapse;
     width: 100%;
@@ -34,24 +18,21 @@ table.min-w-full {
 thead.bg-gray-300 th {
     padding: 0.75rem 1.5rem;
     text-align: left;
-    font-size: 0.75rem; /* 12px */
+    font-size: 0.75rem; 
     font-weight: 700;
     color: #6b7280;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 tbody.bg-white td {
     padding: 0.75rem 1.5rem;
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem; 
     color: #374151;
 }
 
 tbody.bg-white tr:hover {
-    background-color: #f3f4f6; /* light gray */
+    background-color: #f3f4f6; 
 }
-
-/* Form buttons inside table */
 form.rounded-md button {
     cursor: pointer;
     padding: 0.5rem 1rem;
@@ -59,12 +40,10 @@ form.rounded-md button {
     font-weight: 700;
     color: white;
 }
-
 form.rounded-md button:hover {
     filter: brightness(85%);
 }
 
-/* Alerts */
 .bg-green-100, .bg-red-100 {
     padding: 0.75rem 1.25rem;
     border-radius: 0.375rem;
@@ -82,13 +61,13 @@ form.rounded-md button:hover {
     color: #b91c1c;
 }
 
-/* Image styles */
+
 img.rounded {
     border-radius: 0.5rem;
     object-fit: cover;
 }
 
-/* Responsive grid gaps */
+
 .grid.gap-4 {
     gap: 1rem;
 }
@@ -96,17 +75,14 @@ img.rounded {
 .grid.gap-6 {
     gap: 1.5rem;
 }
-
-/* Card padding and margins */
 .p-4 {
     padding: 1rem;
 }
-
 .m-3 {
     margin: 0.75rem;
 }
 
-/* Text truncation for descriptions */
+
 .text-muted {
     color: #6b7280;
 }
@@ -127,12 +103,12 @@ img.rounded {
     color: #111827;
 }
 
-/* Icon spacing */
+
 i.mr-1 {
     margin-right: 0.25rem;
 }
 
-/* Flex and spacing */
+
 .flex.space-x-2 > * + * {
     margin-left: 0.5rem;
 }
@@ -141,28 +117,28 @@ i.mr-1 {
     align-items: center;
 }
 
-/* Card Header */
+
 .card-header.py-3 h6 {
     font-weight: 700;
-    color: #2563eb; /* blue-600 */
+    color: #2563eb; 
 }
 
-/* Small text */
+
 .text-xs {
     font-size: 0.75rem;
 }
 
-/* Headings */
+
 .font-semibold {
     font-weight: 600;
 }
 
-/* Buttons inline forms */
+
 form.inline {
     display: inline;
 }
 
-/* Hover effects for cards */
+
 .p-4.hover\:bg-gray-50:hover {
     background-color: #f9fafb;
     cursor: pointer;

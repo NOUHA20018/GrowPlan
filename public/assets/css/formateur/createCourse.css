@@ -1,17 +1,13 @@
-/* formateur/createCourse.css */
-
 .course-form-container {
     max-width: 800px;
     margin: 0 auto;
 }
-
 .course-form-card {
     background: white;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
 }
-
 .course-form-title {
     font-size: 1.875rem;
     font-weight: 700;
@@ -20,7 +16,6 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid #e5e7eb;
 }
-
 .course-form-group {
     margin-bottom: 1.5rem;
 }
@@ -62,7 +57,6 @@
 
 .course-form-select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 0.75rem center;
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;

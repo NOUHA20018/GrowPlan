@@ -9,7 +9,7 @@
 
    
 <div class="container mx-auto py-4">
-    <h1 class="text-2xl font-bold mb-4">Liste des Quiz</h1>
+    <h1 class="text-2xl font-bold mb-4">Liste des Quizzes</h1>
 
 
     @if(session('success'))
@@ -34,11 +34,9 @@
                 <tr class="hover:bg-gray-100">
                     <td class="border px-4 py-2">{{ $index + 1 }}</td>
                     <td class="border px-4 py-2">{{ $quiz->title }}</td>
-                    <td class="border px-4 py-2">{{ $quiz->cour->title ?? 'N/A' }}</td>
-                    {{-- @if($quiz->chapitre) --}}
-                      <td class="border px-4 py-2">{{ $quiz->chapitre->title ?? 'N/A' }}</td>
-                    {{-- @endif  --}}
-                    <td class="border px-4 py-2 space-x-2">
+                    <td class="border px-4 py-2">{{ $quiz->cour->title ?? '__' }}</td>
+                      <td class="border px-4 py-2">{{ $quiz->chapitre->title ?? '__' }}</td>
+                    <td class="flex justify-between border px-4 py-2 space-x-2">
                         <a href="{{ route('formateur.showQuiz', $quiz->id) }}"
                            style="background-color: cadetblue" class=" text-black px-3 py-1 rounded">Voir</a>
                         <a href="{{ route('formateur.editQuiz', $quiz->id) }}"

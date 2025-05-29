@@ -84,7 +84,6 @@
                 </div>
             </div>
 
-            <!-- Terms and Conditions -->
             <div class="terms-section">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">
@@ -93,7 +92,6 @@
                 </label>
             </div>
 
-            <!-- Submit Button -->
              <div id="card-element">
             <button type="submit" class="submit-btn">
                 <i class="fas fa-lock"></i> Payer maintenant

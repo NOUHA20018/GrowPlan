@@ -1,94 +1,91 @@
 
-            .category-card {
-                transition: all 0.3s ease;
-                border-radius: 0.5rem;
-                overflow: hidden;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .category-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            
-            .category-image {
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
-            }
-            
-            .category-body {
-                padding: 1.25rem;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .category-title {
-                font-size: 1.25rem;
-                font-weight: 600;
-                margin-bottom: 0.75rem;
-                color: #2d3748;
-            }
-            
-            .category-description {
-                color: #4a5568;
-                margin-bottom: 1rem;
-                flex-grow: 1;
-            }
-            
-            .category-meta {
-                color: #718096;
-                font-size: 0.875rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .category-actions {
-                display: flex;
-                gap: 0.5rem;
-                margin-top: auto;
-            }
-            
-            .btn-details {
-                background-color: #5f9ea0;
-                color: white;
-            }
-            
-            .btn-edit {
-                background-color: #f6ad55;
-                color: #1a202c;
-            }
-            
-            .btn-delete {
-                background-color: #e53e3e;
-                color: white;
-            }
-            
-            /* Table improvements */
-            .category-table img {
-                max-width: 80px;
-                height: auto;
-                border-radius: 4px;
-            }
-            
-            /* Responsive grid */
-            @media (max-width: 640px) {
-                .grid-cols-1 {
-                    grid-template-columns: 1fr;
-                }
-            }
-            
-            /* Toggle description */
-            .description-toggle {
-                color: #4299e1;
-                cursor: pointer;
-                font-size: 0.875rem;
-                margin-top: 0.5rem;
-                display: inline-block;
-            }
-            
-            .description-toggle:hover {
-                text-decoration: underline;
-            }
+.category-card {
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.category-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.category-body {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2d3748;
+}
+
+.category-description {
+    color: #4a5568;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.category-meta {
+    color: #718096;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.btn-details {
+    background-color: #5f9ea0;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #f6ad55;
+    color: #1a202c;
+}
+
+.btn-delete {
+    background-color: #e53e3e;
+    color: white;
+}
+
+.category-table img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+    .grid-cols-1 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.description-toggle {
+    color: #4299e1;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.description-toggle:hover {
+    text-decoration: underline;
+}

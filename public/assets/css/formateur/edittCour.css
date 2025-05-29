@@ -1,0 +1,233 @@
+/* showCour.css */
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.header {
+    font-size: 1.8rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .form-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.left-column, .right-column {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+}
+
+.input, .textarea, .select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: #f8fafc;
+    transition: all 0.2s;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+    background-color: white;
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input.editable, .textarea.editable {
+    background-color: white;
+    border-color: #4299e1;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.file-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px dashed #cbd5e0;
+    border-radius: 0.375rem;
+    background-color: #f8fafc;
+}
+
+.select-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.select {
+    flex-grow: 1;
+}
+
+.edit-button {
+    background: none;
+    border: none;
+    color: #4299e1;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0;
+}
+
+.edit-button:hover {
+    text-decoration: underline;
+}
+
+.chapters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.chapters-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.add-chapter-btn {
+    background-color: #48bb78;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+.add-chapter-btn:hover {
+    background-color: #38a169;
+}
+
+/* Style for the Add Quiz button */
+.add-quiz-btn {
+    background-color: #9C27B0; /* Purple color to differentiate from chapter button */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.add-quiz-btn:hover {
+    background-color: #7B1FA2; 
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-chapter-btn, .add-quiz-btn {
+    min-width: 160px;
+    justify-content: center;
+}
+
+
+.chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.chapter-item {
+    background-color: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    color: #2d3748;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid #e2e8f0;
+}
+
+.chapter-item:hover {
+    background-color: #ebf8ff;
+    border-color: #bee3f8;
+}
+
+.save-button-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.save-button {
+    background-color: #4299e1;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.save-button:hover {
+    background-color: #3182ce;
+}
+
+
+
+.bg-gray-200 {
+    background-color: #e5e7eb;
+}
+
+
+@media (max-width: 768px) {
+    .grid-cols-12 > div {
+        grid-column: span 12;
+        margin-bottom: 0.5rem;
+    }
+    
+    .grid-cols-12 {
+        grid-template-columns: 1fr;
+    }
+    
+    .bg-blue-600 {
+        display: none;
+    }
+}

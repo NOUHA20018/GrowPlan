@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <!-- Edit Resume -->
+        
         <div class="form-group">
           <div class="form-header">
             <label><strong>📄 Résumé :</strong></label>
@@ -60,7 +60,6 @@
         </div>
       </div>
 
-      <!-- Right Column -->
       <div class="form-column">
         <div class="form-group">
           <div class="form-header">

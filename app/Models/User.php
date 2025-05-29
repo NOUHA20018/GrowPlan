@@ -96,12 +96,12 @@ class User extends Authenticatable
     public function inscriptionsApprenants()
     {
         return $this->hasManyThrough(
-           Inscription::class, // module li bagha nwsl lih 
-        Cour::class,        // module wasit(cour)
-        'user_id', //krbt user b cour
-        'cour_id', // KYRBT COUR B INSCRIPTION
-        'id',      // dial users
-        'id'       //dial cours
+           Inscription::class, 
+        Cour::class,        
+        'user_id', 
+        'cour_id',
+        'id',     
+        'id'
     );
     }
 

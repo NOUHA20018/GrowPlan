@@ -75,14 +75,9 @@ class ChapterController extends Controller
         
             
             $file->move($temp_dir, "chunk.$chunkNumber");
-        
-            // Si kulchi les morceaux dakhlou
             if (count(scandir($temp_dir)) - 2 == $totalChunks) {
-                // Assemble chunks
                 $finalPath = storage_path("app/public/videos/$filename");
                 $output = fopen($finalPath, 'ab');
-        
-                // L'assemblage de la vidéo
                 for ($i = 1; $i <= $totalChunks; $i++) {
                     $chunk = file_get_contents("$temp_dir/chunk.$i");
                     fwrite($output, $chunk);
@@ -99,7 +94,6 @@ class ChapterController extends Controller
         
         public function editChapter(Chapitre $chapitre)
         {
-            // $chapitre = Chapitre::find($chapitre);
             $chapitres =Chapitre::all();
             return view('formateur.editChapter', compact('chapitre','chapitres'));
         }
@@ -114,12 +108,9 @@ class ChapterController extends Controller
             'video' => 'nullable|file|mimes:mp4,mov,avi|max:5120000',
             'resume' => 'nullable|file|mimes:pdf,docx,txt',
         ]);
-
-        // Définir les chemins de stockage
         $videoPath = public_path('chapitres/' . $id);
         $resumePath = public_path('resumes/' . $id);
 
-        // Créer les dossiers s'ils n'existent pas
         if (!file_exists($videoPath)) mkdir($videoPath, 0777, true);
         if (!file_exists($resumePath)) mkdir($resumePath, 0777, true);
         // Déplacer  vidéo
@@ -152,17 +143,11 @@ class ChapterController extends Controller
     
    unset($validatedData['video'], $validatedData['resume']);
 
-$chapitre->fill($validatedData);
-$chapitre->save();
+    $chapitre->fill($validatedData);
+    $chapitre->save();
 
-    // dd([
-    //     'videoName' => $videoName,
-    //     'stored_in_db' => $chapitre->video,
-    //     'path' => $videoPath . '/' . $videoName,
-    //     'file_exists' => file_exists($videoPath . '/' . $videoName),
-    // ]);
 
-    return redirect()->back();
-}
+        return redirect()->back();
+    }
 
 }

@@ -208,7 +208,6 @@
     background-color: #4338ca;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 600px) {
     .quiz-score-container {
         flex-direction: column;

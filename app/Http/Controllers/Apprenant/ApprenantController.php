@@ -131,7 +131,6 @@ class ApprenantController extends Controller
         $quiz =Quizze::with(['questions.reponses_possible','apprenants'])->find($id);
         $progression=auth()->user()->apprenant_cours()->where('cour_id',$quiz->cour_id)->first()?->pivot->progression;
          $apprenant = User::find(Auth::id()); 
-        //  dd($apprenant);
         $pivot = $apprenant->quizzes()->where('quiz_id', $id)->first();
         if($pivot){
             $responses = json_decode($pivot->pivot->responses_json, true); 

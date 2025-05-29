@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <link rel="stylesheet" href="{{ asset('assets/css/formateur/listCour.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/formateur/showCour.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/formateur/edittCour.css') }}">
     <h2 class="header">
       {{ __('📚 Informations du categorie') }}
     </h2>

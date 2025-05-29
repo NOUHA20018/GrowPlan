@@ -8,13 +8,13 @@
     <div class="py-12">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">Create New Category</h1>
+                <h1 class="form-title">Crée nouveau categorie</h1>
                 
                 <form action="{{ route('formateur.categories.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
                     <div class="form-group">
-                        <label for="title" class="form-label">Category Title</label>
+                        <label for="title" class="form-label">Titre de Categorie</label>
                         <input type="text" id="title" name="title" 
                                class="form-input @error('title') form-input-error @enderror" 
                                placeholder="Enter category title" 
@@ -35,13 +35,13 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Category Image</label>
+                        <label class="form-label"> Image de Categorie</label>
                         <div class="file-input-container">
                             <label for="image" class="file-input-label">
                                 <svg class="file-input-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
-                                <span class="file-input-text">Choose an image file or drag and drop here</span>
+                                <span class="file-input-text">Choisir une image</span>
                             </label>
                             <input type="file" id="image" name="image" 
                                    class="file-input @error('image') form-input-error @enderror"
@@ -79,7 +79,7 @@
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        Create Category
+                        Crée categorie
                     </button>
                 </form>
             </div>
@@ -87,7 +87,6 @@
     </div>
 
     <script>
-        // Image preview functionality
         function previewImage(input) {
             const preview = document.getElementById('previewImage');
             const previewContainer = document.getElementById('imagePreview');
@@ -107,7 +106,6 @@
             }
         }
         
-        // Auto-generate slug from title
         document.getElementById('title').addEventListener('input', function() {
             const title = this.value;
             const slug = title.toLowerCase()

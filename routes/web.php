@@ -26,9 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 // Formateur Routes
 Route::middleware(['auth', 'formateur'])->name('formateur.')->group(function () {
-    // Dashboard
     Route::get('formateur/dashboard', [FormateurController::class, 'index'])->name('dashboard');
-    
     // Courses Management
     Route::get('formateur/courses', [CoursController::class, 'courses'])->name('courses');
     Route::get('formateur/courses/create', [CoursController::class, 'createCourse'])->name('courses.create');
@@ -41,7 +39,6 @@ Route::middleware(['auth', 'formateur'])->name('formateur.')->group(function () 
     Route::delete('forurmateur/courses/{id}/destroy',[CoursController::class,'destroyCours'])->name('cours.destroy');
     Route::delete( 'deleteApprenant/{id}',  [CoursController::class,'deleteApprenant'])->name('deleteApprenant');
 
-    
     // Categories Management
     Route::get('formateur/categories', [CategorieController::class, 'listCategories'])->name('categories.index');
     Route::get('formateur/categories/create', [CategorieController::class, 'addCategory'])->name('categories.create');
@@ -90,12 +87,10 @@ Route::controller(ApprenantController::class)->middleware(['auth', 'apprenant'])
     Route::post('apprenant/cour/reponses/{id}',  'reponses')->name('reponses');
     Route::get('apprenant/cour/quiz/{id}',  'showQuiz')->name('showQuiz');
     Route::get('apprenant/cour/reponses_correct/{id}',  'reponses_correct')->name('reponses_correct');
-    
-    
+      
 });
 Route::middleware(['auth', 'apprenant'])->name('apprenant.')->group(function () {
     Route::post('/paiement/{courId}', [StripePaymentController::class, 'makePayment'])->name('paiement.effectuer');
-
 });
 
 // Admin Routes

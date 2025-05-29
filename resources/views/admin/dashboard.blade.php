@@ -5,7 +5,6 @@
     <div class="flex-1 overflow-auto ">
     <div class="container mx-auto px-4 py-6 ">
         @if(request()->routeIs('admin.cours.attente'))
-        <!-- Cours en attente -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="p-4 bg-blue-600 text-white">
                 <h3 class="text-lg font-semibold"><i class="fas fa-clock mr-2"></i> Cours en attente de validation</h3>

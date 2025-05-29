@@ -1,21 +1,20 @@
-/* Main Container */
+
 .quiz-show-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }
 
-/* Quiz Card */
+
 .quiz-card {
     background-color: white;
     border-radius: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid #374151;
     margin-bottom: 2rem;
     overflow: hidden;
 }
 
-/* Quiz Header */
+
 .quiz-header {
     background: linear-gradient(to right, #4f46e5, #3730a3);
     padding: 1.5rem;
@@ -57,7 +56,7 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Quiz Description */
+
 .quiz-description {
     padding: 1.5rem;
     border-bottom: 1px solid #e5e7eb;
@@ -80,7 +79,7 @@
     font-style: italic;
 }
 
-/* Questions Section */
+
 .questions-section {
     padding: 1.5rem;
 }
@@ -99,7 +98,7 @@
     color: #4f46e5;
 }
 
-/* Question Card */
+
 .question-card {
     border: 1px solid #e5e7eb;
     border-radius: 0.5rem;
@@ -133,7 +132,7 @@
     margin-right: 0.75rem;
 }
 
-/* Options List */
+
 .options-list {
     padding: 1rem;
 }
@@ -181,7 +180,7 @@
     color: #374151;
 }
 
-/* Empty State */
+
 .empty-state {
     text-align: center;
     padding: 2rem 0;
@@ -194,7 +193,7 @@
     color: #d1d5db;
 }
 
-/* Action Buttons */
+
 .action-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -239,7 +238,7 @@
     background-color: #047857;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
     .quiz-header-content {
         flex-direction: column;
@@ -259,7 +258,7 @@
     }
 }
 
-/* Prose Styles */
+
 .prose {
     line-height: 1.6;
 }

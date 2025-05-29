@@ -21,7 +21,6 @@
         <div class="course-info2">
             <div class="course-dates">
                 <span><i class="fas fa-calendar-alt"></i> Créé le {{ $course->created_at->format('d/m/Y') }}</span>
-                {{-- <span><i class="fas fa-clock"></i> {{ $course->chapitres->sum('duree') }} min</span> --}}
             </div>
             
             <div class="course-description">

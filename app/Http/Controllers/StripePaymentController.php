@@ -20,10 +20,11 @@ class StripePaymentController extends Controller
 
 public function makePayment(Request $request, $courId)
 {
+    // dd($request);
     Stripe::setApiKey(env('STRIPE_SECRET'));
 
     $token = $request->stripeToken;
-
+    // dd($token);
     if(!$token) {
         return back()->withErrors('Stripe token is missing.');
     }
@@ -48,7 +49,8 @@ public function makePayment(Request $request, $courId)
         ]);
         $cour = Cour::find($courId);
         $formateur = $cour->user;
-        $formateur->total_earnings += $request->amount;
+        $formateur->total_earnings += $request->amount /100;
+        // dd($formateur,$formateur->total_earnings);
         $formateur->save();
 
         return redirect()->route('apprenant.cours.show',$courId)->with('success', 'Paiement réussi !');

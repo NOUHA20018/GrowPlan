@@ -9,7 +9,6 @@
 
   <div class="container">
     <div class="content">
-  {{-- <form method="POST" action="{{ route('formateur.storeQuiz', [$cour->id, isset($courChapitres->id) ? $courChapitres->id : null]) }}"> --}}
   <form method="POST" action="{{ route('formateur.storeQuiz', [$cour->id] + (isset($courChapitres->id) ? [$courChapitres->id] : [])) }}">
         @csrf
             @if ($errors->any())
@@ -23,11 +22,9 @@
           @endif
         <label >Chapitre Quiz :</label>
         @if($courChapitres instanceof \App\Models\Chapitre)
-        <!-- Affiche un seul chapitre -->
         <input type="hidden" name="chapterQuiz" value="{{ $courChapitres->id }}">
         <p>Chapitre sélectionné : {{ $courChapitres->title }}</p>
         @else
-            <!-- Liste des Chapitres -->
             <select name="chapterQuiz">
                 <option value="">Choisir un Chapitre</option>
                 @foreach ($courChapitres as $chap)

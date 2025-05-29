@@ -1,4 +1,4 @@
-/* Style pour les cartes de cours */
+
 .course-card {
     transition: all 0.3s ease;
     border-radius: 10px;
@@ -10,23 +10,19 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Style pour les badges de catégorie */
+
 .badge {
     font-size: 0.75rem;
     padding: 0.35em 0.65em;
 }
 
-/* Style pour la pagination */
 .pagination .page-item.active .page-link {
     background-color: #4e73df;
     border-color: #4e73df;
 }
-
 .pagination .page-link {
     color: #4e73df;
 }
-
-/* Responsive */
 @media (max-width: 768px) {
     .course-card {
         margin-bottom: 20px;

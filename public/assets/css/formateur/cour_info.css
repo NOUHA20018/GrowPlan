@@ -1,4 +1,4 @@
-/* Style des sections */
+
 .course-section {
   background-color: #f9fafb;
   padding: 2rem;
@@ -7,7 +7,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Boutons de modification */
 .edit-button {
   background-color: #e2e8f0;
   color: #1f2937;
@@ -21,7 +20,6 @@
   background-color: #cbd5e1;
 }
 
-/* Inputs éditables */
 input.editable, textarea.editable {
   background-color: #ffffff !important;
   border: 1px solid #cbd5e1;
@@ -29,7 +27,6 @@ input.editable, textarea.editable {
   padding: 0.5rem;
 }
 
-/* Bouton d'ajout de chapitre */
 .add-chapter-button {
   background-color: #2563eb;
   color: white;
@@ -39,7 +36,6 @@ input.editable, textarea.editable {
   transition: background-color 0.3s ease;
 }
 
-/* Button Save Courses */
 .saveButton{
   background-color : lightpink;
   color:black;
@@ -52,7 +48,6 @@ input.editable, textarea.editable {
   background-color: #1d4ed8;
 }
 
-/* Cartes de chapitres */
 .chapter-card {
   width: 100%;
   max-width: 600px;
@@ -71,7 +66,6 @@ input.editable, textarea.editable {
   border-top-right-radius: 1rem;
 }
 
-/* Résumé */
 .resume-container {
   padding: 1rem;
   background-color: #f8fafc;

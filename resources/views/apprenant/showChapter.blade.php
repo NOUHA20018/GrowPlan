@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fullscreenBtn = document.getElementById('fullscreen');
     
     if(video) {
-        // Play/Pause toggle
+       
         playPauseBtn.addEventListener('click', function() {
             if(video.paused) {
                 video.play();
@@ -137,12 +137,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Update progress bar
+       
         video.addEventListener('timeupdate', function() {
             const percent = (video.currentTime / video.duration) * 100;
             progressBar.value = percent;
             
-            // Update time display
+           
             const currentMins = Math.floor(video.currentTime / 60);
             let currentSecs = Math.floor(video.currentTime % 60);
             if(currentSecs < 10) currentSecs = '0' + currentSecs;
@@ -154,13 +154,12 @@ document.addEventListener('DOMContentLoaded', function() {
             timeDisplay.textContent = `${currentMins}:${currentSecs} / ${durationMins}:${durationSecs}`;
         });
         
-        // Seek video when progress bar changes
+       
         progressBar.addEventListener('input', function() {
             const seekTime = (progressBar.value / 100) * video.duration;
             video.currentTime = seekTime;
         });
         
-        // Fullscreen toggle
         fullscreenBtn.addEventListener('click', function() {
             if(video.requestFullscreen) {
                 video.requestFullscreen();
@@ -171,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Update play/pause icon when video is played/paused
+       
         video.addEventListener('play', function() {
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
         });

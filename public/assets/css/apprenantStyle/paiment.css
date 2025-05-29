@@ -1,26 +1,21 @@
-/* Main Container */
+
 .payment-container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 0 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* Payment Card */
 .payment-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
-
-/* Course Summary */
 .course-summary {
     padding: 2rem;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
     border-bottom: 1px solid #e2e8f0;
 }
-
 .payment-title {
     font-size: 1.8rem;
     color: #2d3748;
@@ -96,7 +91,7 @@
     color: #2d3748;
 }
 
-/* Payment Form */
+
 .payment-form {
     padding: 2rem;
 }
@@ -182,7 +177,7 @@
     color: #718096;
 }
 
-/* Terms Section */
+
 .terms-section {
     display: flex;
     align-items: center;
@@ -204,7 +199,7 @@
     text-decoration: underline;
 }
 
-/* Submit Button */
+
 .submit-btn {
     width: 100%;
     padding: 1rem;
@@ -232,7 +227,7 @@
     transform: translateY(0);
 }
 
-/* Security Note */
+
 .security-note {
     text-align: center;
     margin-top: 1rem;
@@ -248,7 +243,7 @@
     color: #48bb78;
 }
 
-/* Responsive Design */
+
 @media (max-width: 640px) {
     .course-info {
         flex-direction: column;

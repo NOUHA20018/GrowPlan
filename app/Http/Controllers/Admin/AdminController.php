@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cour;
 use App\Models\User;
-use App\Models\ActivityLog;
 use App\Models\Chapitre;
 use App\Models\Notification;
 use App\Models\Quizze;
@@ -16,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    // Dashboard principal
     public function dashboard()
     {
         $lastCours = Cour::latest()->limit(5)->get();
@@ -34,8 +32,6 @@ class AdminController extends Controller
     {
         $enAttenteCourses = Cour::with('admin')
             ->where('status', 'en attente')->get();
-            // ->latest()->paginate(10);
-
         return view('admin.dashboard', [
             'enAttenteCourses' => $enAttenteCourses,
             
@@ -56,7 +52,6 @@ class AdminController extends Controller
         return view('admin.showQuiz',compact('quiz'));
     }
 
-    // button validation
     public function validateCourse($id){
         $course = Cour::find($id);
         if (!$course) {
@@ -70,7 +65,7 @@ class AdminController extends Controller
         $admin->save();
         return redirect()->back()->with('success', 'Le cours a été validé avec succès.');
     }
-    // button refuse
+
     public function refuseCourse($id){
         $course = Cour::find($id);
         if (!$course) {
@@ -79,14 +74,13 @@ class AdminController extends Controller
         $course->admin_id = Auth()->id();
         $course->status = 'refuse';
         $course->save();
-        $user = Auth()->id;
-        $user->cours_refuses +=1;
-        $user->save();
+        $admin = User::find(Auth::id());
+        $admin->cours_refuses +=1;
+        $admin->save();
         return redirect()->back()->with('success', 'Le cours a été refusé avec succès.');
 
     }
 
-    // Courses valides
      public function validesCourses()
     {
         $validesCourses = Cour::with('admin')
@@ -110,7 +104,6 @@ class AdminController extends Controller
 
     }
 
-    // Courses refusé
      public function refusesCourse()
     {
         $refusesCourses = Cour::with('admin')
