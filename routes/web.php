@@ -90,7 +90,9 @@ Route::controller(ApprenantController::class)->middleware(['auth', 'apprenant'])
       
 });
 Route::middleware(['auth', 'apprenant'])->name('apprenant.')->group(function () {
+    Route::get('/paiement/carte/{courid}', [StripePaymentController::class, 'carte'])->name('paiement.carte');
     Route::post('/paiement/{courId}', [StripePaymentController::class, 'makePayment'])->name('paiement.effectuer');
+
 });
 
 // Admin Routes

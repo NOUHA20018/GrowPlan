@@ -15,11 +15,13 @@ class StripePaymentController extends Controller
     {
         return view('apprenant.payment');
     }
-
-
+    public function carte($id){
+    $cour = Cour::findOrFail($id);
+    return view('apprenant.carte', compact('cour'));    }
 
 public function makePayment(Request $request, $courId)
 {
+    $cour=Cour::find($courId);
     // dd($request);
     Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -30,14 +32,14 @@ public function makePayment(Request $request, $courId)
     }
     try {
         $charge = Charge::create([
-            "amount" => $request->amount * 100, 
+            "amount" => $cour->prix * 100, 
             "currency" => "usd",
             "source" => $token,
             "description" => "Paiement cours ID: $courId"
         ]);
 
         Paiement::create([
-            'montant' => $request->amount,
+            'montant' => $charge->amount /100,
             'methode_paiement' => 'stripe',
             'statut' => 'payé',
             'user_id' => auth()->id(),
@@ -49,7 +51,7 @@ public function makePayment(Request $request, $courId)
         ]);
         $cour = Cour::find($courId);
         $formateur = $cour->user;
-        $formateur->total_earnings += $request->amount /100;
+        $formateur->total_earnings += $charge->amount /100;
         // dd($formateur,$formateur->total_earnings);
         $formateur->save();
 

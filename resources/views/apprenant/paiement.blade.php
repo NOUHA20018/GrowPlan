@@ -36,10 +36,8 @@
                 </div>
             </div>
         </div>
-
         
-        <form method="POST" action="{{ route('apprenant.paiement.effectuer', $cour->id) }}" class="payment-form">
-            @csrf
+        <form method="GET" action="{{ route('apprenant.paiement.carte', $cour->id) }}" class="payment-form"id="payment-form">
             
             <h3 class="form-title">Méthode de paiement</h3>
             
@@ -92,10 +90,12 @@
                 </label>
             </div>
 
-             <div id="card-element">
+            <div id="card-element" class="my-3"></div>
+
             <button type="submit" class="submit-btn">
-                <i class="fas fa-lock"></i> Payer maintenant
+            <i class="fas fa-lock"></i> Payer maintenant
             </button>
+
             <input type="hidden" name="amount" value="{{ $cour->prix }}">
              </div>
             <p class="security-note">
@@ -105,29 +105,3 @@
     </div>
 </div>
 @endsection
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  const stripe = Stripe('pk_test_...'); 
-  const elements = stripe.elements();
-  const card = elements.create('card');
-  card.mount('#card-element');
-
-  const form = document.getElementById('payment-form');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const {token, error} = await stripe.createToken(card);
-    if (error) {
-      alert(error.message);
-    } else {
-      const hiddenInput = document.createElement('input');
-      hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'stripeToken');
-      hiddenInput.setAttribute('value', token.id);
-      form.appendChild(hiddenInput);
-
-      form.submit();
-    }
-  });
-</script>

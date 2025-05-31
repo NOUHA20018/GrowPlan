@@ -1,0 +1,88 @@
+ .payment-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .payment-header h1 {
+        color: #2c3e50;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .payment-header p {
+        color: #7f8c8d;
+        font-size: 1rem;
+    }
+
+    .course-info {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .course-title {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .course-price {
+        font-weight: 700;
+        color: #27ae60;
+        font-size: 1.2rem;
+    }
+
+    #card-element {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    #card-errors {
+        color: #e74c3c;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-pay {
+        width: 100%;
+        padding: 1rem;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .btn-pay:hover {
+        background: #2980b9;
+    }
+
+    .secure-payment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.5rem;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    .secure-payment svg {
+        margin-right: 0.5rem;
+    }
